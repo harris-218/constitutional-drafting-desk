@@ -693,256 +693,256 @@
       card.addEventListener('dragstart', (e) => {
         draggedId = clause.id;
         card.style.opacity = '0.5';
-        e.dataTransfer.setData('text/plain', clause.id);
-        e.dataTransfer.effectAllowed = 'move';
+    let currentActiveTab = 'desk'; // 'desk' | 'timeline' | 'worksheets'
+    let currentWsSubtab = 1; // 1, 2, 3, or 4
+
+    // Kinesthetic Timeline Worksheet Data (Milestones 1777–1791)
+    const KINESTHETIC_EVENTS = [
+      { id: 'k-1', year: '1777', title: 'Articles of Confederation Drafted', correctSlot: 'slot-1', text: 'Second Continental Congress adopts the first national compact prioritizing state sovereignty.' },
+      { id: 'k-2', year: '1786–1787', title: 'Shays\' Rebellion in Massachusetts', correctSlot: 'slot-2', text: 'Indebted farmers shut down debtor courts; federal government is unable to send troops.' },
+      { id: 'k-3', year: '1787', title: 'Constitutional Convention (Philadelphia)', correctSlot: 'slot-3', text: 'Delegates draft a three-branch federal framework balancing large and small state delegations.' },
+      { id: 'k-4', year: '1791', title: 'Ratification of the Bill of Rights', correctSlot: 'slot-4', text: 'Ten amendments added to protect individual civil liberties and satisfy Anti-Federalist demands.' }
+    ];
+
+    let userTimelinePlacements = {}; // eventId -> slotId
+
+    function switchViewTab(tab) {
+      currentActiveTab = tab;
+      const deskEl = document.getElementById('mainContent');
+      const timelineEl = document.getElementById('timelineView');
+      const worksheetsEl = document.getElementById('worksheetsView');
+      
+      const btnDesk = document.getElementById('btnTabDesk');
+      const btnWs = document.getElementById('btnTabWorksheets');
+      const btnTl = document.getElementById('btnTabTimeline');
+
+      // Reset all buttons to default inactive styling
+      [btnDesk, btnWs, btnTl].forEach(b => {
+        if (b) b.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 transition";
       });
 
-      card.addEventListener('dragend', () => {
-        card.style.opacity = '1';
-        draggedId = null;
-      });
+      // Hide all main containers
+      deskEl.classList.add('hidden');
+      timelineEl.classList.add('hidden');
+      worksheetsEl.classList.add('hidden');
 
-      card.innerHTML = `
-        <div>
-          <div class="flex items-start justify-between gap-1.5 mb-1.5">
-            <div class="flex items-center gap-1.5 min-w-0">
-              <span class="text-sm p-1 rounded-md bg-slate-100 border border-slate-200">${clause.icon}</span>
-              <h4 class="text-xs font-bold text-slate-900 font-display truncate">${clause.title}</h4>
-            </div>
-            ${activeChamber ? `
-              <button onclick="unassignClause('${clause.id}', event)" class="text-slate-400 hover:text-rose-600 p-0.5 rounded transition" title="Return to Vault">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-              </button>
+      if (tab === 'desk') {
+        deskEl.classList.remove('hidden');
+        btnDesk.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition";
+      } else if (tab === 'worksheets') {
+        worksheetsEl.classList.remove('hidden');
+        btnWs.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-700 text-white shadow-sm transition";
+        renderKinestheticTimeline();
+      } else if (tab === 'timeline') {
+        timelineEl.classList.remove('hidden');
+        btnTl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition";
+        renderTimeline();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      playSoundEffect('click');
+    }
+
+    function switchWsSubtab(subtabNum) {
+      currentWsSubtab = subtabNum;
+      for (let i = 1; i <= 4; i++) {
+        const panel = document.getElementById(`wsSubpanel-${i}`);
+        const tabBtn = document.getElementById(`wsTab-${i}`);
+        if (i === subtabNum) {
+          panel.classList.remove('hidden');
+          tabBtn.className = "px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white shadow-xs transition";
+        } else {
+          panel.classList.add('hidden');
+          tabBtn.className = "px-3 py-1.5 rounded-xl font-semibold text-slate-700 hover:text-black transition";
+        }
+      }
+      if (subtabNum === 1) renderKinestheticTimeline();
+      playSoundEffect('click');
+    }
+
+    // Kinesthetic Drag-and-Drop Timeline Logic
+    function renderKinestheticTimeline() {
+      const tray = document.getElementById('timelineCardTray');
+      const slotsContainer = document.getElementById('timelineDropSlots');
+      if (!tray || !slotsContainer) return;
+
+      tray.innerHTML = '';
+      slotsContainer.innerHTML = '';
+
+      const slotConfigs = [
+        { id: 'slot-1', expectedYear: '1777', label: 'Milestone 1 (1777): First National Compact' },
+        { id: 'slot-2', expectedYear: '1786–1787', label: 'Milestone 2 (1786–1787): Domestic Rebellion & Crisis' },
+        { id: 'slot-3', expectedYear: '1787', label: 'Milestone 3 (1787): Philadelphia Constitutional Assembly' },
+        { id: 'slot-4', expectedYear: '1791', label: 'Milestone 4 (1791): Civil Liberties Safeguards' }
+      ];
+
+      // Build Slots
+      slotConfigs.forEach(cfg => {
+        const slotEl = document.createElement('div');
+        slotEl.id = cfg.id;
+        slotEl.className = 'arch-drop-zone rounded-xl p-3 bg-slate-50 border-2 border-dashed border-slate-300 min-h-[110px] flex flex-col justify-between';
+        slotEl.ondragover = handleDragOver;
+        slotEl.ondragleave = handleDragLeave;
+        slotEl.ondrop = (e) => handleTimelineDrop(e, cfg.id);
+
+        const assignedEventId = Object.keys(userTimelinePlacements).find(k => userTimelinePlacements[k] === cfg.id);
+        const assignedEvent = assignedEventId ? KINESTHETIC_EVENTS.find(ev => ev.id === assignedEventId) : null;
+
+        slotEl.innerHTML = `
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-200">
+            <span class="text-[10px] font-mono font-bold uppercase text-emerald-800">${cfg.label}</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-bold">${cfg.expectedYear}</span>
+          </div>
+          <div class="flex-1 mt-2 flex flex-col justify-center">
+            ${assignedEvent ? `
+              <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-300 flex items-center justify-between text-xs">
+                <div>
+                  <h5 class="font-bold text-slate-900">${assignedEvent.title}</h5>
+                  <p class="text-[11px] text-slate-600 font-serif">${assignedEvent.text}</p>
+                </div>
+                <button onclick="unassignTimelineEvent('${assignedEvent.id}')" class="text-slate-400 hover:text-rose-600 ml-2 font-bold" title="Remove">✕</button>
+              </div>
             ` : `
-              <span class="text-slate-400 text-xs">⋮⋮</span>
+              <span class="text-xs text-slate-400 italic text-center py-2">Drop milestone card here</span>
             `}
           </div>
-          <p class="text-[12px] text-slate-700 leading-snug line-clamp-3 font-serif mt-1 font-medium">${summaryText}</p>
-        </div>
+        `;
+        slotsContainer.appendChild(slotEl);
+      });
 
-        <div class="mt-3 pt-2 border-t border-slate-200 flex items-center justify-between text-[11px]">
-          <button onclick="readClauseAloud('${clause.id}', event)" class="text-slate-700 hover:text-amber-800 font-bold flex items-center gap-1 transition" title="Audio Read-Aloud">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.757 3.63 8.25 4.51 8.25H6.75z"/></svg>
-            <span>Listen</span>
-          </button>
-          ${!activeChamber ? `
-            <button onclick="openDispatchModal('${clause.id}', event)" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-900 font-bold text-[10px] transition shadow-xs">
-              Dispatch...
-            </button>
-          ` : `
-            <span class="font-mono uppercase tracking-wider text-[10px] font-bold text-slate-600">${activeChamber}</span>
-          `}
-        </div>
-      `;
-
-      return card;
-    }
-
-    function handleDragOver(e) {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      e.currentTarget.classList.add('drag-hover');
-    }
-
-    function handleDragLeave(e) {
-      e.currentTarget.classList.remove('drag-hover');
-    }
-
-    function handleDrop(e, targetChamber) {
-      e.preventDefault();
-      e.currentTarget.classList.remove('drag-hover');
-      const id = e.dataTransfer.getData('text/plain') || draggedId;
-      if (!id) return;
-
-      studentPlacements[id] = targetChamber;
-      playSoundEffect('place');
-      renderDesk();
-    }
-
-    function unassignClause(id, e) {
-      if (e) e.stopPropagation();
-      delete studentPlacements[id];
-      playSoundEffect('click');
-      renderDesk();
-    }
-
-    function openDispatchModal(id, e) {
-      if (e) e.stopPropagation();
-      activeDispatchId = id;
-      const clause = HISTORICAL_DATA.find(c => c.id === id);
-      document.getElementById('dispatchCardTitle').innerText = clause.title;
-      document.getElementById('dispatchCardDesc').innerText = readingLevel === 'guided' ? clause.guidedSummary : clause.standardSummary;
-      document.getElementById('dispatchModal').classList.remove('hidden');
-      playSoundEffect('click');
-    }
-
-    function closeDispatchModal() {
-      activeDispatchId = null;
-      document.getElementById('dispatchModal').classList.add('hidden');
-    }
-
-    function confirmDispatch(chamber) {
-      if (activeDispatchId) {
-        studentPlacements[activeDispatchId] = chamber;
-        playSoundEffect('place');
-        renderDesk();
-      }
-      closeDispatchModal();
-    }
-
-    function auditDraft() {
-      const placedKeys = Object.keys(studentPlacements);
-      if (placedKeys.length === 0) {
-        showDeskNotice("Place at least one clause into a chamber before running the audit.");
-        return;
-      }
-
-      let accurate = 0;
-      HISTORICAL_DATA.forEach(clause => {
-        const studentChoice = studentPlacements[clause.id];
-        const cardElement = document.getElementById(`card-${clause.id}`);
-        if (!cardElement) return;
-
-        if (studentChoice === clause.category) {
-          accurate++;
-          cardElement.classList.remove('border-rose-500', 'bg-rose-50');
-          cardElement.classList.add('border-emerald-600', 'bg-emerald-50');
-        } else if (studentChoice) {
-          cardElement.classList.remove('border-emerald-600', 'bg-emerald-50');
-          cardElement.classList.add('border-rose-500', 'bg-rose-50');
+      // Build unassigned cards in tray
+      let remainingCount = 0;
+      KINESTHETIC_EVENTS.forEach(ev => {
+        if (!userTimelinePlacements[ev.id]) {
+          remainingCount++;
+          const card = document.createElement('div');
+          card.id = `kcard-${ev.id}`;
+          card.draggable = true;
+          card.className = 'p-2.5 rounded-lg bg-white border-2 border-slate-300 hover:border-emerald-500 text-xs shadow-xs cursor-grab select-none flex flex-col justify-between';
+          card.ondragstart = (e) => {
+            e.dataTransfer.setData('text/plain', ev.id);
+          };
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">${ev.year}</span>
+                <span class="text-slate-400 text-xs">⋮⋮</span>
+              </div>
+              <h5 class="font-bold text-slate-900 text-xs">${ev.title}</h5>
+              <p class="text-[11px] text-slate-600 font-serif leading-snug mt-1">${ev.text}</p>
+            </div>
+          `;
+          tray.appendChild(card);
         }
       });
 
-      const totalPlaced = placedKeys.length;
-      const percent = Math.round((accurate / totalPlaced) * 100);
-      document.getElementById('counterAccuracy').innerText = `${percent}%`;
-
-      if (percent === 100 && totalPlaced === HISTORICAL_DATA.length) {
-        playSoundEffect('success');
-        showDeskNotice("Splendid! All 12 constitutional powers correctly audited according to 1787 standards.");
-      } else {
-        playSoundEffect('misplaced');
-        showDeskNotice(`Audit Complete: ${accurate}/${totalPlaced} accurate (${percent}%). Review flagged red cards.`);
+      if (remainingCount === 0) {
+        tray.innerHTML = '<span class="col-span-full text-center text-xs text-emerald-700 font-serif font-bold py-2">✓ All milestones placed! Click "Verify Chronology" above.</span>';
       }
     }
 
-    function showDeskNotice(msg) {
-      let toast = document.getElementById('deskToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'deskToast';
-        toast.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 border-2 border-amber-500 text-amber-200 px-4 py-3 rounded-xl shadow-2xl text-xs max-w-sm transition duration-300 font-serif font-semibold';
-        document.body.appendChild(toast);
-      }
-      toast.innerText = msg;
-      toast.style.opacity = '1';
-      setTimeout(() => { toast.style.opacity = '0'; }, 4000);
-    }
+    function handleTimelineDrop(e, slotId) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-hover');
+      const eventId = e.dataTransfer.getData('text/plain');
+      if (!eventId) return;
 
-    function setReadingLevel(lvl) {
-      readingLevel = lvl;
-      const btnStd = document.getElementById('modeStandard');
-      const btnGdd = document.getElementById('modeGuided');
-
-      if (lvl === 'guided') {
-        btnGdd.className = "px-3 py-1 rounded-lg font-bold bg-amber-700 text-white shadow-sm transition";
-        btnStd.className = "px-3 py-1 rounded-lg font-semibold text-slate-600 hover:text-slate-900 transition";
-        showDeskNotice("Guided Reader Enabled: Summaries adjusted to plain language for IEP support.");
-      } else {
-        btnStd.className = "px-3 py-1 rounded-lg font-bold bg-amber-700 text-white shadow-sm transition";
-        btnGdd.className = "px-3 py-1 rounded-lg font-semibold text-slate-600 hover:text-slate-900 transition";
-      }
-      playSoundEffect('click');
-      renderDesk();
-    }
-
-    function adjustFontSize(delta) {
-      currentScaleDelta = Math.max(-1, Math.min(2, currentScaleDelta + delta));
-      const content = document.getElementById('mainContent');
-      if (currentScaleDelta === -1) content.style.fontSize = '90%';
-      else if (currentScaleDelta === 0) content.style.fontSize = '100%';
-      else if (currentScaleDelta === 1) content.style.fontSize = '110%';
-      else if (currentScaleDelta === 2) content.style.fontSize = '120%';
-      playSoundEffect('click');
-    }
-
-    function readClauseAloud(id, e) {
-      if (e) e.stopPropagation();
-      const clause = HISTORICAL_DATA.find(c => c.id === id);
-      if (!clause) return;
-
-      const speech = new SpeechSynthesisUtterance();
-      speech.text = `${clause.title}. ${readingLevel === 'guided' ? clause.guidedSummary : clause.standardSummary}`;
-      speech.rate = 0.95;
-      speech.pitch = 1.0;
-      window.speechSynthesis.speak(speech);
-      playSoundEffect('click');
-    }
-
-    function toggleCoachDrawer() {
-      const drawer = document.getElementById('coachDrawer');
-      drawer.classList.toggle('translate-x-full');
-      playSoundEffect('click');
-    }
-
-    function autoStudyFill() {
-      HISTORICAL_DATA.forEach(c => {
-        studentPlacements[c.id] = c.category;
+      // Ensure no other event occupies this slot
+      Object.keys(userTimelinePlacements).forEach(k => {
+        if (userTimelinePlacements[k] === slotId) delete userTimelinePlacements[k];
       });
-      renderDesk();
-      auditDraft();
-      showDeskNotice("Study Key Activated: All clauses placed into verified historical categories.");
+
+      userTimelinePlacements[eventId] = slotId;
+      playSoundEffect('place');
+      renderKinestheticTimeline();
     }
 
-    function openNotebookModal() {
-      document.getElementById('notebookModal').classList.remove('hidden');
-      updateNotebookEvidenceLog();
+    function unassignTimelineEvent(eventId) {
+      delete userTimelinePlacements[eventId];
       playSoundEffect('click');
+      renderKinestheticTimeline();
     }
 
-    function closeNotebookModal() {
-      document.getElementById('notebookModal').classList.add('hidden');
-    }
-
-    function updateNotebookEvidenceLog() {
-      const log = document.getElementById('notebookEvidenceLog');
-      if (!log) return;
-      log.innerHTML = '';
-
-      const placedKeys = Object.keys(studentPlacements);
-      if (placedKeys.length === 0) {
-        log.innerHTML = '<span class="text-slate-500 italic">No clauses classified yet. Categorize clauses on the desk to automatically assemble your DBQ evidence outline.</span>';
+    function checkTimelineSequence() {
+      const placedCount = Object.keys(userTimelinePlacements).length;
+      if (placedCount === 0) {
+        showDeskNotice("Drag at least one event card into a caption slot first.");
         return;
       }
-
-      placedKeys.forEach(id => {
-        const item = HISTORICAL_DATA.find(c => c.id === id);
-        const chamber = studentPlacements[id];
-        const row = document.createElement('div');
-        row.innerHTML = `<strong class="text-amber-400">[${chamber.toUpperCase()}]</strong> ${item.title}`;
-        log.appendChild(row);
+      let correct = 0;
+      KINESTHETIC_EVENTS.forEach(ev => {
+        if (userTimelinePlacements[ev.id] === ev.correctSlot) correct++;
       });
+      if (correct === KINESTHETIC_EVENTS.length) {
+        playSoundEffect('success');
+        showDeskNotice("Flawless! All 4 constitutional chronology milestones correctly sequenced.");
+      } else {
+        playSoundEffect('misplaced');
+        showDeskNotice(`Timeline Sequence: ${correct}/${KINESTHETIC_EVENTS.length} correct. Check chronological years.`);
+      }
     }
 
-    function copyNotebookText() {
-      const thesis = "Although both the Articles of Confederation and the U.S. Constitution shared a commitment to popular sovereignty and anti-monarchical republicanism, the institutional deficiencies of the Confederation—most notably its inability to levy taxes and enforce treaties—compelled delegates in 1787 to engineer an energetic federal republic characterized by separated branches and national supremacy.";
-      const itemsList = Object.keys(studentPlacements).map(id => {
-        const item = HISTORICAL_DATA.find(c => c.id === id);
-        return `- [${studentPlacements[id]}] ${item.title}`;
-      }).join('\n');
+    // Format 2: ELL Primary Source Vocabulary & Stems
+    function showVocab(term, def) {
+      const inspector = document.getElementById('vocabDesc');
+      if (inspector) {
+        inspector.innerHTML = `<strong>${term.toUpperCase()}:</strong> ${def}`;
+      }
+      playSoundEffect('click');
+    }
 
-      const fullOutput = `DBQ RATIFICATION SYNTHESIS\n\nThesis:\n${thesis}\n\nEvidence Categorized:\n${itemsList}`;
+    function insertStem(stemText) {
+      const textarea = document.getElementById('elResponseText');
+      if (textarea) {
+        textarea.value += (textarea.value.length > 0 ? '\n' : '') + stemText;
+        textarea.focus();
+      }
+      playSoundEffect('click');
+    }
 
-      const tempTextArea = document.createElement('textarea');
-      tempTextArea.value = fullOutput;
-      document.body.appendChild(tempTextArea);
-      tempTextArea.select();
+    function saveElResponse() {
+      playSoundEffect('success');
+      showDeskNotice("Saved: Your guided source analysis response has been stored!");
+    }
+
+    // Format 3: Cause and Effect Verifier
+    function checkCauseEffect() {
+      const a1 = document.getElementById('causeEffect1').value;
+      const a2 = document.getElementById('causeEffect2').value;
+      const a3 = document.getElementById('causeEffect3').value;
+      const feedback = document.getElementById('causeEffectFeedback');
+
+      let correctCount = 0;
+      if (a1 === 'correct') correctCount++;
+      if (a2 === 'correct') correctCount++;
+      if (a3 === 'correct') correctCount++;
+
+      if (correctCount === 3) {
+        feedback.innerHTML = '<span class="text-emerald-700 font-bold">✓ Splendid! All 3 causal chains correctly identified and linked to constitutional remedies.</span>';
+        playSoundEffect('success');
+      } else {
+        feedback.innerHTML = `<span class="text-rose-600 font-bold">Incomplete: ${correctCount}/3 correct. Make sure to match each specific governmental crisis to its exact solution.</span>`;
+        playSoundEffect('misplaced');
+      }
+    }
+
+    // Format 4: Copy Advanced DBQ Response
+    function copyAdvDbqResponse() {
+      const text = document.getElementById('dbqAdvResponseText').value;
+      if (!text || text.trim().length === 0) {
+        showDeskNotice("Please type your response before copying.");
+        return;
+      }
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
       document.execCommand('copy');
-      document.body.removeChild(tempTextArea);
+      document.body.removeChild(temp);
 
-      const btn = document.getElementById('btnCopyNotebook');
-      btn.innerText = '✓ Copied to Clipboard!';
-      setTimeout(() => { btn.innerText = 'Copy Outline to Clipboard'; }, 3000);
+      const btnText = document.getElementById('btnCopyAdvDbqText');
+      btnText.innerText = "✓ Copied Response!";
+      setTimeout(() => { btnText.innerText = "Copy Constructed Response"; }, 3000);
       playSoundEffect('click');
     }
 
