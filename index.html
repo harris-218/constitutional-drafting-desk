@@ -39,12 +39,12 @@
   </script>
 
   <style>
-    /* Rich medium-blue canvas with subtle coordinate grid */
+    /* Rich black canvas with subtle dark architectural grid */
     body {
-      background-color: #93c5fd;
+      background-color: #000000;
       background-image: 
-        linear-gradient(to right, rgba(30, 58, 138, 0.12) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(30, 58, 138, 0.12) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
       background-size: 32px 32px;
       color: #0f172a;
     }
@@ -53,7 +53,7 @@
     .parchment-sheet {
       background-color: #ffffff;
       color: #0f172a;
-      box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.15), 0 0 0 1px rgba(30, 58, 138, 0.08);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
     }
 
     .parchment-card {
@@ -81,13 +81,13 @@
 
     /* Accessible Scrollbar */
     ::-webkit-scrollbar { width: 7px; height: 7px; }
-    ::-webkit-scrollbar-track { background: #93c5fd; }
-    ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 9999px; }
+    ::-webkit-scrollbar-track { background: #0b0f17; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans antialiased text-slate-900 bg-[#93c5fd]">
+<body class="min-h-screen flex flex-col font-sans antialiased text-slate-900 bg-black">
 
-  <header class="w-full border-b border-blue-300 bg-white sticky top-0 z-40 px-4 lg:px-8 py-3 shadow-md">
+  <header class="w-full border-b border-slate-800 bg-white sticky top-0 z-40 px-4 lg:px-8 py-3 shadow-md">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       
       <!-- Brand & Era Seal -->
@@ -893,6 +893,227 @@
       btn.innerText = '✓ Copied to Clipboard!';
       setTimeout(() => { btn.innerText = 'Copy Outline to Clipboard'; }, 3000);
       playSoundEffect('click');
+    }
+
+    // Complete Transcription of the Comprehensive Timeline of United States History (Pages 1-9)
+    const FULL_TIMELINE_DATA = [
+      {
+        id: 'era-1',
+        title: '1. Colonial Era (1492–1763)',
+        events: [
+          { date: 'October 12, 1492', title: 'First Voyage of Christopher Columbus', text: 'Funded by the Spanish Crown, Columbus made landfall in the Bahamas, inaugurating sustained transatlantic contact, European colonization, and the Columbian Exchange of crops, animals, and diseases that devastated Indigenous populations.' },
+          { date: '1565', title: 'Founding of St. Augustine', text: 'Spanish admiral Pedro Menéndez de Avilés established St. Augustine in Florida, making it the oldest continuously inhabited European-established settlement within the boundaries of the continental United States.' },
+          { date: 'May 14, 1607', title: 'Founding of Jamestown', text: 'The Virginia Company established Jamestown along the James River in Virginia, marking England\'s first permanent colony in North America and initiating recurring armed conflicts with the Powhatan Confederacy.' },
+          { date: 'August 1619', title: 'Arrival of First Enslaved Africans in Virginia', text: 'A privateer ship, the White Lion, arrived at Point Comfort, Virginia, carrying approximately 20 captured Angolans who were sold to English colonists, initiating chattel slavery in the British North American colonies.' },
+          { date: 'November 1620', title: 'Mayflower Landing and Mayflower Compact', text: 'English Separatist Pilgrims landed at Plymouth, Massachusetts, signing the Mayflower Compact aboard their ship to institute a self-governing colonial framework based on mutual consent.' },
+          { date: '1675–1676', title: 'King Philip\'s War', text: 'A bloody armed conflict between an alliance of Indigenous nations led by Wampanoag leader Metacom (King Philip) and New England colonists along with their Indigenous allies decimated dozens of colonial settlements and broke Native sovereignty in southern New England.' },
+          { date: '1676', title: 'Bacon\'s Rebellion', text: 'Nathaniel Bacon led Virginian frontiersmen and indentured servants in an armed revolt against Royal Governor William Berkeley over Indigenous border policy, burning Jamestown and accelerating the colonial transition from white indentured servitude to racialized chattel slavery.' },
+          { date: '1730s–1740s', title: 'The First Great Awakening', text: 'A widespread evangelical Protestant religious revival swept through the American colonies, spearheaded by preachers Jonathan Edwards and George Whitefield. It fostered shared intercolonial identities and challenged traditional clerical hierarchy.' },
+          { date: '1754–1763', title: 'French and Indian War (Seven Years\' War)', text: 'Great Britain and its North American colonies fought France and its Indigenous allies over territory in the Ohio River Valley. The British victory expelled French colonial power from eastern North America but left Britain with massive war debt, prompting Parliament to levy direct taxes on the colonies.' }
+        ]
+      },
+      {
+        id: 'era-2',
+        title: '2. Revolutionary & Early Republic Era (1764–1815)',
+        events: [
+          { date: 'March 22, 1765', title: 'The Stamp Act and Colonial Protests', text: 'The British Parliament passed the Stamp Act, requiring internal tax stamps on paper goods and legal documents throughout the colonies. It provoked intense resistance under the rallying cry of "no taxation without representation" and spurred the Stamp Act Congress.' },
+          { date: 'March 5, 1770', title: 'Boston Massacre', text: 'British troops fired into an agitated colonial crowd in Boston, Massachusetts, killing five civilians. The event was widely publicized by Samuel Adams and Paul Revere, fueling anti-British sentiment across the colonies.' },
+          { date: 'December 16, 1773', title: 'Boston Tea Party', text: 'Protesting the Tea Act and Parliament\'s taxation policies, Sons of Liberty activists disguised as Mohawk warriors boarded three British East India Company ships in Boston Harbor and dumped 342 chests of tea into the water.' },
+          { date: 'September 5 – October 26, 1774', title: 'First Continental Congress', text: 'Delegates from 12 of the 13 colonies convened in Carpenters\' Hall in Philadelphia to organize a unified response to the Coercive (Intolerable) Acts, establishing the Continental Association to enforce economic boycotts against Great Britain.' },
+          { date: 'April 19, 1775', title: 'Battles of Lexington and Concord', text: 'Colonial minutemen and British regular soldiers engaged in armed combat in Massachusetts ("the shot heard \'round the world"), officially commencing the military phase of the American Revolutionary War.' },
+          { date: 'July 4, 1776', title: 'Declaration of Independence', text: 'The Second Continental Congress adopted the Declaration of Independence in Philadelphia, severing formal political ties with Great Britain and establishing the United States as an independent sovereign nation.' },
+          { date: 'October 17, 1777', title: 'Battle of Saratoga', text: 'American forces captured British General John Burgoyne\'s army in upstate New York, marking the military turning point of the Revolutionary War and convincing France to formally ally with the American revolutionaries.' },
+          { date: 'October 19, 1781', title: 'Surrender at Yorktown', text: 'A combined force of American and French troops under George Washington and the Comte de Rochambeau trapped General Cornwallis at Yorktown, Virginia, forcing his surrender and ending major combat operations in North America.' },
+          { date: '1787–1788', title: 'Ratification of the U.S. Constitution', text: 'Delegates drafted the Constitution at the Constitutional Convention in Philadelphia, replacing the Articles of Confederation with a federal system dividing power across three branches.' },
+          { date: 'December 15, 1791', title: 'Ratification of the Bill of Rights', text: 'Ten amendments were added to the U.S. Constitution, safeguarding individual civil liberties such as free speech, religious freedom, and trial by jury, while reserving unenumerated powers to the states and the people.' },
+          { date: 'February 24, 1803', title: 'Marbury v. Madison', text: 'The Supreme Court, led by Chief Justice John Marshall, established the principle of judicial review, granting federal courts the constitutional authority to invalidate acts of Congress that violate the Constitution.' },
+          { date: 'April 30, 1803', title: 'Louisiana Purchase', text: 'President Thomas Jefferson purchased approximately 828,000 square miles of territory west of the Mississippi River from France for $15 million, doubling the geographic footprint of the United States.' },
+          { date: '1812–1815', title: 'War of 1812', text: 'Fought between the U.S. and Great Britain over trade restrictions, the impressment of American sailors, and British support for Native American resistance on the western frontier, the war ended in a stalemate under the Treaty of Ghent, solidifying American national identity.' }
+        ]
+      },
+      {
+        id: 'era-3',
+        title: '3. Antebellum Era (1816–1860)',
+        events: [
+          { date: 'March 3, 1820', title: 'Missouri Compromise', text: 'Congress admitted Missouri as a slave state and Maine as a free state to preserve sectional parity in the Senate, while prohibiting slavery in the remainder of the Louisiana Purchase territory north of the 36°30\' parallel.' },
+          { date: 'December 2, 1823', title: 'The Monroe Doctrine', text: 'President James Monroe declared that the Western Hemisphere was closed to further European colonization and that any European intervention in the Americas would be viewed as an act of hostility toward the United States.' },
+          { date: 'May 28, 1830', title: 'Indian Removal Act', text: 'President Andrew Jackson signed legislation granting federal authority to negotiate treaties that forced Native American nations off their ancestral lands in the Southeast to designated territories west of the Mississippi River.' },
+          { date: '1831–1839', title: 'The Trail of Tears', text: 'Federal troops and state militias forcibly expelled the Cherokee, Muscogee (Creek), Seminole, Chickasaw, and Choctaw nations from the Southeast to Indian Territory (modern Oklahoma). Harsh exposure, disease, and starvation claimed an estimated 4,000 to 5,000 Cherokee lives alone along the march.' },
+          { date: '1846–1848', title: 'Mexican-American War', text: 'Following the 1845 annexation of Texas, border disputes triggered war between the U.S. and Mexico. The 1848 Treaty of Guadalupe Hidalgo ceded California, Nevada, Utah, and parts of Arizona, New Mexico, Colorado, and Wyoming to the U.S. for $15 million.' },
+          { date: 'July 19–20, 1848', title: 'Seneca Falls Convention', text: 'Organized by Elizabeth Cady Stanton and Lucretia Mott, the first women\'s rights convention issued the Declaration of Sentiments, demanding equal social, civil, and religious rights for women, including the right to vote.' },
+          { date: 'September 1850', title: 'Compromise of 1850 and Fugitive Slave Act', text: 'A legislative package admitted California as a free state and banned the slave trade in Washington, D.C., while enacting a stringent Fugitive Slave Act that required northern authorities and citizens to assist in capturing escaped enslaved persons under federal penalty.' },
+          { date: 'March 3, 1851', title: 'Indian Appropriations Act and Reservation System', text: 'Congress passed the first of several Indian Appropriations Acts, formally authorizing the federal government to establish enclosed reservations across the West to concentrate Indigenous nations onto restricted tracts as white settlement expanded.' },
+          { date: 'May 30, 1854', title: 'Kansas-Nebraska Act', text: 'Drafted by Stephen A. Douglas, this law repealed the Missouri Compromise by applying "popular sovereignty" to determine slavery\'s legality in Kansas and Nebraska, igniting violent guerilla warfare known as "Bleeding Kansas" and giving rise to the anti-slavery Republican Party.' },
+          { date: 'March 6, 1857', title: 'Dred Scott v. Sandford', text: 'The Supreme Court ruled that Black people—enslaved or free—were not U.S. citizens and had no standing to sue in federal court. Chief Justice Roger B. Taney further declared that Congress lacked constitutional power to ban slavery in federal territories, effectively invalidating federal compromises on slavery.' },
+          { date: 'November 6, 1860', title: 'Election of Abraham Lincoln', text: 'Republican candidate Abraham Lincoln won the presidency without carrying a single Southern state, prompting South Carolina to issue its Declaration of Secession six weeks later and setting the Civil War in motion.' }
+        ]
+      },
+      {
+        id: 'era-4',
+        title: '4. Civil War & Reconstruction Era (1861–1877)',
+        events: [
+          { date: 'April 12, 1861 – April 9, 1865', title: 'American Civil War', text: 'Eleven Southern slave states seceded from the Union, triggering four years of armed conflict that began at Fort Sumter and concluded with General Robert E. Lee\'s surrender at Appomattox Court House. Over 600,000 soldiers died, the Union was preserved, and 4 million enslaved people were liberated.' },
+          { date: 'January 1, 1863', title: 'Emancipation Proclamation', text: 'President Abraham Lincoln issued an executive order declaring all enslaved people residing within Confederate states in open rebellion to be permanently free, transforming the war aim into an explicit crusade against slavery and enabling Black enlistment in the Union military.' },
+          { date: 'July 1–3, 1863', title: 'Battle of Gettysburg', text: 'Union forces under General George Meade repelled General Robert E. Lee\'s Confederate invasion of Pennsylvania in the bloodiest battle of the war. Paired with Ulysses S. Grant\'s victory at Vicksburg on July 4, it marked the military turning point toward Union victory.' },
+          { date: '1864', title: 'The Long Walk of the Navajo (Hwéeldi)', text: 'The U.S. military, under Colonel Kit Carson, rounded up more than 8,000 Diné (Navajo) men, women, and children and forced them to march over 300 miles on foot from their homeland in the Four Corners region to an internment camp at Bosque Redondo, New Mexico, resulting in hundreds of deaths along the route.' },
+          { date: 'April 14, 1865', title: 'Assassination of Abraham Lincoln', text: 'Confederate sympathizer John Wilkes Booth shot President Lincoln at Ford\'s Theatre in Washington, D.C., elevating Vice President Andrew Johnson to the presidency and plunging federal Reconstruction policy into turmoil.' },
+          { date: 'December 6, 1865', title: 'Ratification of the 13th Amendment', text: 'The first Reconstruction Amendment was officially ratified, constitutionally abolishing slavery and involuntary servitude throughout the United States, except as punishment for a crime.' },
+          { date: 'July 9, 1868', title: 'Ratification of the 14th Amendment', text: 'Ratification established birthright citizenship, directly overturning the Dred Scott ruling, and prohibited states from denying any person due process of law or equal protection under the laws.' },
+          { date: 'February 3, 1870', title: 'Ratification of the 15th Amendment', text: 'The third Reconstruction Amendment prohibited federal and state governments from denying any citizen the right to vote based on "race, color, or previous condition of servitude," ushering in unprecedented political representation for Black men across the South.' },
+          { date: 'June 25–26, 1876', title: 'Battle of the Little Bighorn', text: 'During the Great Sioux War, an allied coalition of Lakota, Northern Cheyenne, and Arapaho warriors decisively defeated Lieutenant Colonel George Armstrong Custer\'s 7th Cavalry in Montana Territory.' },
+          { date: 'March 1877', title: 'Compromise of 1877 (End of Reconstruction)', text: 'An unwritten bipartisan agreement resolved the contested 1876 presidential election by awarding 20 disputed electoral votes to Republican Rutherford B. Hayes in exchange for the complete withdrawal of federal troops from the South, dismantling federal civil rights protections and clearing the path for Jim Crow segregation.' }
+        ]
+      },
+      {
+        id: 'era-5',
+        title: '5. Industrial & Progressive Era (1878–1929)',
+        events: [
+          { date: 'May 4, 1886', title: 'Haymarket Affair', text: 'A labor rally in Chicago\'s Haymarket Square in support of an eight-hour workday turned violent when a bomb was thrown at police, killing seven officers and several civilians. The fallout provoked nationwide anti-labor backlash, crippled the Knights of Labor, and cemented the May 1 International Workers\' Day movement.' },
+          { date: 'February 8, 1887', title: 'Dawes General Allotment Act', text: 'Congress authorized the federal government to break up communal Native American tribal reservations into individually owned private plots, selling surplus acreage to white settlers and devastating Indigenous tribal land bases and traditional governance.' },
+          { date: 'July 2, 1890', title: 'Sherman Antitrust Act', text: 'Congress passed the nation\'s first major antitrust statute to curb artificial restrictions on interstate commerce and dismantle corporate monopolies ("trusts"), laying the statutory groundwork for Progressive Era trust-busting under Theodore Roosevelt and William Howard Taft.' },
+          { date: 'December 29, 1890', title: 'Wounded Knee Massacre', text: 'U.S. 7th Cavalry troops surrounded an encampment of Miniconjou Lakota near Wounded Knee Creek in South Dakota and opened fire, killing between 250 and 300 men, women, and children. The massacre effectively marked the end of armed resistance during the Plains Indian Wars.' },
+          { date: 'May 11 – July 20, 1894', title: 'Pullman Strike', text: 'A nationwide boycott led by Eugene V. Debs and the American Railway Union shut down rail traffic across the Midwest following wage cuts by the Pullman Palace Car Company. President Grover Cleveland intervened with federal troops and an injunction, setting a precedent for executive intervention against organized labor.' },
+          { date: 'May 18, 1896', title: 'Plessy v. Ferguson', text: 'The Supreme Court upheld racial segregation laws for public facilities under the "separate but equal" doctrine, providing constitutional legitimacy to Southern Jim Crow laws for nearly six decades.' },
+          { date: 'April 25 – August 12, 1898', title: 'Spanish-American War', text: 'Following the explosion of the USS Maine in Havana, the U.S. intervened in Cuba and defeated Spain in a brief conflict, acquiring Puerto Rico, Guam, and the Philippines under the Treaty of Paris and emerging as an overseas imperial power.' },
+          { date: 'June 30, 1906', title: 'Pure Food and Drug Act and Meat Inspection Act', text: 'Spurred by investigative muckrakers like Upton Sinclair (author of The Jungle), President Theodore Roosevelt signed twin consumer protection statutes requiring accurate ingredient labeling and sanitary standards in livestock processing, giving birth to modern food regulation and the FDA.' },
+          { date: 'December 23, 1913', title: 'Federal Reserve Act', text: 'President Woodrow Wilson signed legislation establishing the Federal Reserve System, creating the nation\'s central banking apparatus to regulate the money supply, control credit, and stabilize financial crises.' },
+          { date: 'April 6, 1917', title: 'U.S. Entry into World War I', text: 'Prompted by unrestricted German submarine warfare and the interception of the Zimmermann Telegram, Congress declared war on the German Empire, mobilizing over four million troops and catapulting the U.S. onto the center stage of global geopolitics.' },
+          { date: 'August 18, 1920', title: 'Ratification of the 19th Amendment', text: 'Following decades of activism by the women\'s suffrage movement, the 19th Amendment was ratified, prohibiting federal and state governments from denying citizens the right to vote on the basis of sex.' },
+          { date: 'June 2, 1924', title: 'Indian Citizenship Act', text: 'Congress granted full U.S. citizenship to all Native Americans born within the territorial limits of the country, though many states continued to deny them voting rights for decades through local statutes.' },
+          { date: 'October 29, 1929', title: 'Black Tuesday and Wall Street Crash', text: 'Share prices on the New York Stock Exchange collapsed entirely, wiping out billions in paper value, shuttering thousands of banks, and plunging the nation into the Great Depression.' }
+        ]
+      },
+      {
+        id: 'era-6',
+        title: '6. Modern Era: Depression, World War & Cold War (1930–1999)',
+        events: [
+          { date: '1933–1939', title: 'The New Deal Programs', text: 'President Franklin D. Roosevelt enacted an unprecedented flurry of executive actions and legislative programs (including the Social Security Act, CCC, and WPA), creating the modern federal welfare, regulatory, and financial safety net.' },
+          { date: 'December 7, 1941', title: 'Attack on Pearl Harbor and Entry into WWII', text: 'Imperial Japan launched a surprise military strike on the U.S. naval base at Pearl Harbor, Hawaii, prompting Congress to declare war the following day and bringing the U.S. into World War II across European and Pacific theaters.' },
+          { date: 'June 6, 1944', title: 'D-Day (Normandy Landings)', text: 'Allied forces launched the largest amphibious military assault in history on the beaches of Normandy, France, opening a western front against Nazi Germany that precipitated the liberation of Western Europe.' },
+          { date: 'August 6–9, 1945', title: 'Atomic Bombings of Hiroshima and Nagasaki', text: 'The United States dropped two atomic bombs on the Japanese cities of Hiroshima and Nagasaki, killing over 100,000 people immediately, leading to Japan\'s unconditional surrender, ending World War II, and ushering in the nuclear age.' },
+          { date: 'March 12, 1947', title: 'The Truman Doctrine', text: 'President Harry S. Truman pledged American economic and military assistance to democratic nations under threat from authoritarian forces (initially Greece and Turkey), formally establishing the foreign policy doctrine of Soviet containment that defined the Cold War.' },
+          { date: 'May 17, 1954', title: 'Brown v. Board of Education', text: 'A unanimous Supreme Court decision struck down racial segregation in public schools, declaring that "separate educational facilities are inherently unequal" and overturning the doctrine established in Plessy v. Ferguson.' },
+          { date: 'October 16–28, 1962', title: 'Cuban Missile Crisis', text: 'A 13-day confrontation erupted after U.S. reconnaissance discovered Soviet nuclear ballistic missiles installed in Cuba. President John F. Kennedy instituted a naval quarantine; the standoff ended when Soviet Premier Nikita Khrushchev agreed to dismantle the sites in exchange for a U.S. pledge not to invade Cuba and the quiet removal of U.S. Jupiter missiles from Turkey.' },
+          { date: 'November 22, 1963', title: 'Assassination of John F. Kennedy', text: 'President John F. Kennedy was assassinated in Dallas, Texas, by Lee Harvey Oswald. Vice President Lyndon B. Johnson took the oath of office and utilized the national crisis to drive passage of major civil rights and anti-poverty legislation.' },
+          { date: 'July 2, 1964', title: 'Civil Rights Act of 1964', text: 'President Lyndon B. Johnson signed landmark federal legislation outlawing segregation in public facilities and banning employment discrimination on the basis of race, color, religion, sex, or national origin.' },
+          { date: '1964–1973', title: 'Vietnam War (Direct U.S. Combat Involvement)', text: 'Following the 1964 Gulf of Tonkin Resolution, the U.S. dramatically escalated military involvement to halt communist expansion in Southeast Asia. Over 58,000 American service members were killed, prompting widespread domestic anti-war protests and culminating in the 1973 Paris Peace Accords and the 1975 fall of Saigon.' },
+          { date: 'July 20, 1969', title: 'Apollo 11 Moon Landing', text: 'NASA astronauts Neil Armstrong and Buzz Aldrin landed the Apollo 11 Lunar Module on the Moon, making Armstrong the first human to set foot on the lunar surface and fulfilling the central milestone of the Space Race against the Soviet Union.' },
+          { date: 'August 9, 1974', title: 'Resignation of Richard Nixon (Watergate Scandal)', text: 'Facing imminent congressional impeachment and removal following revelations of a break-in cover-up at the Democratic National Committee headquarters, Richard Nixon became the first U.S. president to resign from office.' },
+          { date: 'November 9, 1989', title: 'Fall of the Berlin Wall', text: 'East German authorities opened the border crossings dividing East and West Berlin, prompting citizens to dismantle the wall. The event symbolized the collapse of Soviet control over Eastern Europe, precipitating German reunification in 1990 and the formal dissolution of the Soviet Union in December 1991.' }
+        ]
+      },
+      {
+        id: 'era-7',
+        title: '7. 21st Century (2000 – Present)',
+        events: [
+          { date: 'September 11, 2001', title: 'September 11 Terrorist Attacks', text: 'Al-Qaeda operatives hijacked four commercial airliners, striking the World Trade Center towers in New York City and the Pentagon in Arlington, Virginia, while a fourth plane crashed in Shanksville, Pennsylvania. The attacks initiated the Global War on Terrorism, including the wars in Afghanistan and Iraq.' },
+          { date: 'March 20, 2003', title: 'U.S. Invasion of Iraq', text: 'A U.S.-led coalition invaded Iraq to topple Saddam Hussein\'s regime over disputed intelligence alleging weapons of mass destruction, setting off a multi-year insurgency and military occupation.' },
+          { date: 'August 29, 2005', title: 'Hurricane Katrina', text: 'A Category 3 hurricane struck the Gulf Coast, causing catastrophic levee failures in New Orleans, killing more than 1,800 people, and exposing critical failures in federal, state, and local disaster response apparatuses.' },
+          { date: 'September 2008', title: 'The Great Recession and Lehman Brothers Collapse', text: 'The collapse of Lehman Brothers triggered the 2008 global financial crisis, stemming from the subprime mortgage meltdown. It led to the Emergency Economic Stabilization Act ($700 billion TARP bailout) and the worst economic contraction since the 1930s.' },
+          { date: 'November 4, 2008', title: 'Election of Barack Obama', text: 'Barack Obama was elected the 44th President of the United States, making history as the nation\'s first African American commander-in-chief.' },
+          { date: 'March 23, 2010', title: 'Passage of the Affordable Care Act (ACA)', text: 'President Barack Obama signed the Patient Protection and Affordable Care Act, enacting the most sweeping overhaul of the American healthcare system since the creation of Medicare and Medicaid in 1965.' },
+          { date: 'June 26, 2015', title: 'Obergefell v. Hodges (Marriage Equality)', text: 'In a 5-4 landmark decision, the U.S. Supreme Court ruled that the Fourteenth Amendment guarantees same-sex couples the fundamental right to marry, legalizing same-sex marriage nationwide.' },
+          { date: '2020', title: 'COVID-19 Pandemic and Social Upheaval', text: 'The arrival of SARS-CoV-2 brought widespread lockdowns, over one million American deaths, and unprecedented economic relief packages (such as the CARES Act). The same year saw the largest civil rights demonstrations in decades following the murder of George Floyd.' },
+          { date: 'January 6, 2021', title: 'Attack on the U.S. Capitol', text: 'Following the 2020 presidential election, a crowd of Donald Trump supporters breached the U.S. Capitol in an attempt to disrupt the joint session of Congress certifying Electoral College votes, resulting in the evacuation of lawmakers and Trump\'s second impeachment.' },
+          { date: 'June 24, 2022', title: 'Dobbs v. Jackson Women\'s Health Organization', text: 'The Supreme Court overturned nearly 50 years of federal precedent established by Roe v. Wade (1973), ending the constitutional right to abortion and returning reproductive health authority entirely to individual states.' },
+          { date: 'November 5, 2024', title: '2024 Presidential Election', text: 'Former President Donald Trump defeated Vice President Kamala Harris, securing 312 electoral votes to win non-consecutive presidential terms, becoming only the second president in U.S. history to do so after Grover Cleveland in 1892.' }
+        ]
+      }
+    ];
+
+    let currentActiveTab = 'desk'; // 'desk' | 'timeline'
+
+    function switchViewTab(tab) {
+      currentActiveTab = tab;
+      const deskEl = document.getElementById('mainContent');
+      const timelineEl = document.getElementById('timelineView');
+      const btnTab = document.getElementById('btnTabTimeline');
+
+      if (tab === 'timeline') {
+        deskEl.classList.add('hidden');
+        timelineEl.classList.remove('hidden');
+        btnTab.classList.remove('bg-amber-500', 'text-slate-950');
+        btnTab.classList.add('bg-slate-900', 'text-amber-300');
+        btnTab.innerHTML = `
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/></svg>
+          <span>Back to Drafting Desk</span>
+        `;
+        renderTimeline();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        timelineEl.classList.add('hidden');
+        deskEl.classList.remove('hidden');
+        btnTab.classList.add('bg-amber-500', 'text-slate-950');
+        btnTab.classList.remove('bg-slate-900', 'text-amber-300');
+        btnTab.innerHTML = `
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+          <span>U.S. History Timeline</span>
+        `;
+      }
+      playSoundEffect('click');
+    }
+
+    function renderTimeline(filterText = '') {
+      const container = document.getElementById('timelineEntries');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const query = filterText.toLowerCase().trim();
+
+      FULL_TIMELINE_DATA.forEach(era => {
+        const matchingEvents = query === '' 
+          ? era.events 
+          : era.events.filter(ev => ev.title.toLowerCase().includes(query) || ev.date.toLowerCase().includes(query) || ev.text.toLowerCase().includes(query));
+
+        if (matchingEvents.length === 0) return;
+
+        const eraSection = document.createElement('div');
+        eraSection.id = era.id;
+        eraSection.className = 'parchment-sheet bg-white rounded-2xl p-5 sm:p-6 border-2 border-slate-300 shadow-xl';
+
+        let eventsHtml = matchingEvents.map(ev => `
+          <div class="relative pl-6 sm:pl-8 pb-5 border-l-2 border-amber-300 last:border-l-0 last:pb-0">
+            <div class="absolute -left-2 top-0.5 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow"></div>
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <span class="font-mono text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">${ev.date}</span>
+              <h4 class="text-sm font-bold text-slate-900 font-display">${ev.title}</h4>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed font-serif">${ev.text}</p>
+          </div>
+        `).join('');
+
+        eraSection.innerHTML = `
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+            <h3 class="text-base font-bold font-display text-slate-900 text-amber-900">${era.title}</h3>
+            <span class="text-xs font-mono font-bold text-slate-500">${matchingEvents.length} Event${matchingEvents.length === 1 ? '' : 's'}</span>
+          </div>
+          <div class="mt-2 space-y-1">
+            ${eventsHtml}
+          </div>
+        `;
+
+        container.appendChild(eraSection);
+      });
+
+      if (container.children.length === 0) {
+        container.innerHTML = `
+          <div class="parchment-sheet bg-white rounded-2xl p-8 text-center text-slate-600 font-serif">
+            No events found matching "${filterText}". Try searching a different keyword (e.g., "Constitution", "Lincoln", "Treaty").
+          </div>
+        `;
+      }
+    }
+
+    function filterTimelineSearch() {
+      const q = document.getElementById('timelineSearchInput').value;
+      renderTimeline(q);
+    }
+
+    function scrollToEra(eraId) {
+      const el = document.getElementById(eraId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     // Initialize desk on load
