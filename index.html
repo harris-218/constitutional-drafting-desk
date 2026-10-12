@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Constitutional Drafting Desk (1777–1789) - UDL Civics Lab</title>
+  <title>The Constitutional Drafting Desk &amp; Differentiated Civics Lab (1777–1789)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Tone.js for accessible acoustic feedback -->
+  <!-- Tone.js for acoustic feedback -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
-  <!-- Google Fonts: Cinzel (Historical Display), Newsreader (Serif Editorial), and Inter (Clean Body) -->
+  <!-- Google Fonts: Cinzel, Newsreader, Inter, and JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -22,16 +22,6 @@
             serif: ['Newsreader', 'Georgia', 'serif'],
             sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            deskBase: '#0d111a',
-            parchment: '#f8f4eb',
-            parchmentDark: '#ede5d4',
-            parchmentBorder: '#d6c7ab',
-            confedWax: '#b45309',
-            constWax: '#1d4ed8',
-            consensusGold: '#047857',
-            inkMuted: '#475569',
           }
         }
       }
@@ -39,25 +29,22 @@
   </script>
 
   <style>
-    /* Rich black canvas with subtle dark architectural grid */
+    /* Pure black canvas background with subtle architectural grid lines */
     body {
       background-color: #000000;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
       background-size: 32px 32px;
       color: #0f172a;
     }
     
-    /* Stark white block styling */
     .parchment-sheet {
-      background-color: #ffffff;
-      color: #0f172a;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
     .parchment-card {
-      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.18s ease, border-color 0.18s ease;
       touch-action: none;
     }
     .parchment-card:hover {
@@ -67,85 +54,88 @@
       cursor: grabbing;
     }
 
-    /* Custom drop targets with architectural frame */
     .arch-drop-zone {
       position: relative;
-      border: 2px dashed #cbd5e1;
       transition: all 0.2s ease;
     }
     .arch-drop-zone.drag-hover {
       border-color: #d97706 !important;
-      background-color: rgba(245, 158, 11, 0.1) !important;
-      box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.15);
+      background-color: rgba(245, 158, 11, 0.15) !important;
+      box-shadow: inset 0 0 16px rgba(245, 158, 11, 0.25);
     }
 
-    /* Accessible Scrollbar */
+    /* Clean accessible scrollbar */
     ::-webkit-scrollbar { width: 7px; height: 7px; }
-    ::-webkit-scrollbar-track { background: #0b0f17; }
+    ::-webkit-scrollbar-track { background: #000000; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans antialiased text-slate-900 bg-black">
 
-  <header class="w-full border-b border-slate-800 bg-white sticky top-0 z-40 px-4 lg:px-8 py-3 shadow-md">
+  <!-- Top Navigation Header (Pure White Surface) -->
+  <header class="w-full border-b border-slate-700 bg-white sticky top-0 z-40 px-4 lg:px-8 py-3 shadow-lg">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       
-      <!-- Brand & Era Seal -->
-      <div class="flex items-center space-x-3.5">
-        <div class="w-11 h-11 rounded-full bg-blue-50 border-2 border-amber-600 flex items-center justify-center text-amber-700 shadow-sm">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <!-- Seal & Title -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-amber-50 border-2 border-amber-600 flex items-center justify-center text-amber-800 shadow-sm shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.5m-15 0V21M4.5 10.5h15" />
           </svg>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-base sm:text-lg font-bold tracking-wider text-slate-900 font-display uppercase">Constitutional Drafting Desk</h1>
-            <span class="px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded-md bg-amber-100 text-amber-900 border border-amber-400">1777–1789</span>
+            <h1 class="text-sm sm:text-base font-bold tracking-wider text-slate-900 font-display uppercase">Constitutional Drafting Desk</h1>
+            <span class="px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded-md bg-amber-100 text-amber-900 border border-amber-300">1777–1789</span>
           </div>
-          <p class="text-xs text-slate-600 font-serif italic">Comparative Inquiry: Articles of Confederation vs. Federal Constitution</p>
+          <p class="text-[11px] text-slate-600 font-serif italic">Articles of Confederation vs. U.S. Constitution Comparative Lab</p>
         </div>
       </div>
 
-      <!-- Main Navigation Tabs: Drafting Desk vs. Full Timeline -->
-      <div class="flex items-center bg-slate-100 p-1.5 rounded-2xl border-2 border-slate-300 shadow-sm">
-        <button id="btnTabDesk" onclick="switchViewTab('desk')" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.5m-15 0V21M4.5 10.5h15"/></svg>
+      <!-- Three Main Navigation Tabs -->
+      <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-300 shadow-inner">
+        <button id="btnTabDesk" onclick="switchViewTab('desk')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-600 text-white shadow-xs transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.5m-15 0V21M4.5 10.5h15"/></svg>
           <span>Drafting Desk</span>
         </button>
-        <button id="btnTabTimeline" onclick="switchViewTab('timeline')" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 transition">
-          <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        <button id="btnTabWorksheets" onclick="switchViewTab('worksheets')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 transition">
+          <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Differentiated Worksheets</span>
+        </button>
+        <button id="btnTabTimeline" onclick="switchViewTab('timeline')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 transition">
+          <svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
           <span>U.S. History Timeline</span>
         </button>
       </div>
 
       <!-- Accessibility & UDL Action Bar -->
-      <div class="flex items-center flex-wrap gap-2.5">
-        <!-- Reading Level Toggle -->
-        <div class="flex items-center bg-blue-50 border border-blue-200 rounded-xl p-1 text-xs">
-          <button id="modeStandard" onclick="setReadingLevel('standard')" class="px-2.5 py-1 rounded-lg font-bold bg-white text-blue-950 shadow-xs border border-blue-200/80 transition">
+      <div class="flex items-center flex-wrap gap-2">
+        <!-- Reading Level Switcher -->
+        <div class="flex items-center bg-blue-50 border border-blue-200 rounded-lg p-0.5 text-xs">
+          <button id="modeStandard" onclick="setReadingLevel('standard')" class="px-2 py-1 rounded font-bold bg-white text-blue-950 shadow-xs border border-blue-200 transition">
             Standard (AP)
           </button>
-          <button id="modeGuided" onclick="setReadingLevel('guided')" class="px-2.5 py-1 rounded-lg font-medium text-slate-700 hover:text-slate-950 transition">
+          <button id="modeGuided" onclick="setReadingLevel('guided')" class="px-2 py-1 rounded font-medium text-slate-700 hover:text-slate-950 transition">
             Guided Reader (IEP)
           </button>
         </div>
 
         <!-- Text Size Scaler -->
-        <div class="flex items-center bg-blue-50 border border-blue-200 rounded-xl px-2 py-1 text-xs text-slate-800 gap-1.5">
-          <span class="text-[10px] text-slate-600 uppercase font-mono font-bold">Size</span>
-          <button onclick="adjustFontSize(-1)" class="w-6 h-6 hover:bg-blue-100 rounded font-bold transition" title="Smaller font">A-</button>
-          <button onclick="adjustFontSize(1)" class="w-6 h-6 hover:bg-blue-100 rounded font-bold transition" title="Larger font">A+</button>
+        <div class="flex items-center bg-blue-50 border border-blue-200 rounded-lg px-2 py-1 text-xs text-slate-800 gap-1">
+          <span class="text-[10px] text-slate-500 uppercase font-mono font-bold">Size</span>
+          <button onclick="adjustFontSize(-1)" class="w-5 h-5 hover:bg-blue-100 rounded font-bold transition">A-</button>
+          <button onclick="adjustFontSize(1)" class="w-5 h-5 hover:bg-blue-100 rounded font-bold transition">A+</button>
         </div>
 
-        <!-- Tone.js Audio Affirmation Switch -->
-        <button id="audioToggle" onclick="toggleAudio()" class="p-2 rounded-xl bg-blue-50 border border-blue-200 hover:border-amber-500 text-slate-700 hover:text-slate-900 transition" title="Toggle Audio Feedback">
+        <!-- Tone.js Audio Affirmation Button -->
+        <button id="audioToggle" onclick="toggleAudio()" class="p-1.5 rounded-lg bg-blue-50 border border-blue-200 hover:border-amber-500 text-slate-700 transition" title="Toggle Audio Feedback">
           <svg id="audioIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M17.657 6.343a8 8 0 010 11.314M11 5L6 9H2v6h4l5 4V5z"/>
           </svg>
         </button>
 
         <!-- Socratic Guide Drawer Button -->
-        <button onclick="toggleCoachDrawer()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm">
+        <button onclick="toggleCoachDrawer()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-xs">
           <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
           </svg>
@@ -153,7 +143,7 @@
         </button>
 
         <!-- Live DBQ Notebook Export Button -->
-        <button onclick="openNotebookModal()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-300 text-slate-800 text-xs font-semibold transition">
+        <button onclick="openNotebookModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-300 text-slate-800 text-xs font-semibold transition">
           <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
           </svg>
@@ -164,33 +154,34 @@
     </div>
   </header>
 
+  <!-- MAIN VIEW 1: Interactive Drafting Desk -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 flex flex-col gap-5" id="mainContent">
 
     <!-- Interactive Federalism Power Scale (Light Green Container) -->
-    <section class="parchment-sheet bg-emerald-50/90 rounded-2xl p-5 border-2 border-emerald-300 shadow-xl">
+    <section class="parchment-sheet bg-emerald-50/95 rounded-2xl p-5 border-2 border-emerald-300 shadow-xl">
       <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-3 border-b border-emerald-200">
         
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-200/80 border border-emerald-400 flex items-center justify-center text-emerald-900 font-mono text-base font-bold shadow-xs">
+          <div class="w-9 h-9 rounded-xl bg-emerald-200/80 border border-emerald-400 flex items-center justify-center text-emerald-950 font-mono text-base font-bold shadow-xs">
             ⚖️
           </div>
           <div>
             <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-950">The Scale of American Sovereignty</h2>
-            <p class="text-[12px] text-emerald-800">Classify provisions to observe the constitutional shift from state primacy to energetic federal authority.</p>
+            <p class="text-[12px] text-emerald-900">Classify provisions to observe the constitutional shift from state primacy to energetic federal authority.</p>
           </div>
         </div>
 
         <!-- Status Counters & Action Button -->
         <div class="flex items-center gap-4 text-xs">
-          <div class="flex items-center gap-2">
-            <span class="text-emerald-800 font-medium">Archived:</span>
-            <span id="counterPlaced" class="font-mono font-bold text-emerald-950 bg-white/90 px-2.5 py-1 rounded-lg border border-emerald-300">0 / 12</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-emerald-900 font-medium">Placed:</span>
+            <span id="counterPlaced" class="font-mono font-bold text-emerald-950 bg-white px-2.5 py-1 rounded-lg border border-emerald-300">0 / 12</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="text-emerald-800 font-medium">Accuracy:</span>
-            <span id="counterAccuracy" class="font-mono font-bold text-emerald-950 bg-white/90 px-2.5 py-1 rounded-lg border border-emerald-300">--%</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-emerald-900 font-medium">Accuracy:</span>
+            <span id="counterAccuracy" class="font-mono font-bold text-emerald-950 bg-white px-2.5 py-1 rounded-lg border border-emerald-300">--%</span>
           </div>
-          <button onclick="auditDraft()" class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+          <button onclick="auditDraft()" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow transition active:scale-95 flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             <span>Verify Classification</span>
           </button>
@@ -205,7 +196,7 @@
           <span class="text-emerald-950 font-bold">Consensus Center (<span id="gaugeSharedCount">0</span>)</span>
           <span class="text-sky-950 font-bold flex items-center gap-1">Federal Supremacy (<span id="gaugeConstCount">0</span>) ▶</span>
         </div>
-        <div class="w-full h-3.5 bg-white/80 rounded-full overflow-hidden p-0.5 border border-emerald-300 flex">
+        <div class="w-full h-3.5 bg-white rounded-full overflow-hidden p-0.5 border border-emerald-300 flex">
           <div id="gaugeConfedBar" class="h-full bg-amber-600 rounded-l-full transition-all duration-300" style="width: 0%;"></div>
           <div id="gaugeSharedBar" class="h-full bg-emerald-600 transition-all duration-300" style="width: 0%;"></div>
           <div id="gaugeConstBar" class="h-full bg-sky-600 rounded-r-full transition-all duration-300" style="width: 0%;"></div>
@@ -217,14 +208,14 @@
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-4">
 
       <!-- Left Chamber: Articles of Confederation (5 Cols - Light Yellow) -->
-      <div class="lg:col-span-5 flex flex-col rounded-2xl parchment-sheet bg-amber-50/90 border-2 border-amber-300 p-4 relative overflow-hidden shadow-lg">
+      <div class="lg:col-span-5 flex flex-col rounded-2xl parchment-sheet bg-amber-50/95 border-2 border-amber-300 p-4 relative overflow-hidden shadow-lg">
         <div class="absolute top-0 left-0 w-full h-1.5 bg-amber-500"></div>
-        <div class="flex items-center justify-between pb-3 border-b border-amber-200 mb-3">
+        <div class="flex items-center justify-between pb-2.5 border-b border-amber-200 mb-2.5">
           <div>
             <span class="text-[10px] uppercase font-mono tracking-widest text-amber-800 font-bold block">Compact of 1777 / 1781</span>
             <h3 class="text-sm font-bold font-display text-amber-950">Articles of Confederation</h3>
           </div>
-          <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-lg bg-amber-200/80 text-amber-950 border border-amber-300" id="slotConfedBadge">0 / 4 Slots</span>
+          <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-lg bg-amber-200/90 text-amber-950 border border-amber-300" id="slotConfedBadge">0 / 4 Slots</span>
         </div>
         <p class="text-xs text-amber-900 mb-3 font-serif italic">"A firm league of friendship... each state retains its sovereignty, freedom, and independence."</p>
 
@@ -232,18 +223,18 @@
              ondragover="handleDragOver(event)" 
              ondragleave="handleDragLeave(event)" 
              ondrop="handleDrop(event, 'confed')" 
-             class="arch-drop-zone rounded-xl flex-1 min-h-[220px] p-2.5 flex flex-col gap-2.5 bg-white/70 border-2 border-dashed border-amber-300">
+             class="arch-drop-zone rounded-xl flex-1 min-h-[220px] p-2.5 flex flex-col gap-2.5 bg-white/80 border-2 border-dashed border-amber-300">
           <!-- Dropped Cards Injected Here -->
         </div>
       </div>
 
-      <!-- Center Pillar: Republican Consensus & Shared Heritage (2 Cols - Light Yellow) -->
-      <div class="lg:col-span-2 flex flex-col rounded-2xl parchment-sheet bg-amber-50/90 border-2 border-amber-300 p-4 relative overflow-hidden shadow-lg">
+      <!-- Center Pillar: Republican Consensus (2 Cols - Light Yellow) -->
+      <div class="lg:col-span-2 flex flex-col rounded-2xl parchment-sheet bg-amber-50/95 border-2 border-amber-300 p-4 relative overflow-hidden shadow-lg">
         <div class="absolute top-0 left-0 w-full h-1.5 bg-amber-500"></div>
-        <div class="text-center pb-3 border-b border-amber-200 mb-3">
-          <span class="text-[10px] uppercase font-mono tracking-widest text-amber-800 font-bold block">Shared Keystones</span>
+        <div class="text-center pb-2.5 border-b border-amber-200 mb-2.5">
+          <span class="text-[10px] uppercase font-mono tracking-widest text-amber-800 font-bold block">Shared Ideals</span>
           <h3 class="text-xs font-bold font-display text-amber-950">Republican Core</h3>
-          <span class="inline-block mt-1 text-[10px] font-mono font-bold px-2.5 py-0.2 rounded-lg bg-amber-200/80 text-amber-950 border border-amber-300" id="slotSharedBadge">0 / 4</span>
+          <span class="inline-block mt-1 text-[10px] font-mono font-bold px-2 py-0.5 rounded-lg bg-amber-200/90 text-amber-950 border border-amber-300" id="slotSharedBadge">0 / 4</span>
         </div>
         <p class="text-[11px] text-amber-900 text-center mb-3 font-serif italic">Enduring 1776 Ideals</p>
 
@@ -251,20 +242,20 @@
              ondragover="handleDragOver(event)" 
              ondragleave="handleDragLeave(event)" 
              ondrop="handleDrop(event, 'shared')" 
-             class="arch-drop-zone rounded-xl flex-1 min-h-[220px] p-2 flex flex-col gap-2.5 bg-white/70 border-2 border-dashed border-amber-300">
+             class="arch-drop-zone rounded-xl flex-1 min-h-[220px] p-2 flex flex-col gap-2.5 bg-white/80 border-2 border-dashed border-amber-300">
           <!-- Shared Dropped Cards Injected Here -->
         </div>
       </div>
 
       <!-- Right Chamber: U.S. Constitution (5 Cols - Light Yellow) -->
-      <div class="lg:col-span-5 flex flex-col rounded-2xl parchment-sheet bg-amber-50/90 border-2 border-amber-300 p-4 relative overflow-hidden shadow-lg">
+      <div class="lg:col-span-5 flex flex-col rounded-2xl parchment-sheet bg-amber-50/95 border-2 border-amber-300 p-4 relative overflow-hidden shadow-lg">
         <div class="absolute top-0 left-0 w-full h-1.5 bg-amber-500"></div>
-        <div class="flex items-center justify-between pb-3 border-b border-amber-200 mb-3">
+        <div class="flex items-center justify-between pb-2.5 border-b border-amber-200 mb-2.5">
           <div>
             <span class="text-[10px] uppercase font-mono tracking-widest text-amber-800 font-bold block">Charter of 1787 / 1789</span>
             <h3 class="text-sm font-bold font-display text-amber-950">The U.S. Constitution</h3>
           </div>
-          <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-lg bg-amber-200/80 text-amber-950 border border-amber-300" id="slotConstBadge">0 / 4 Slots</span>
+          <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-lg bg-amber-200/90 text-amber-950 border border-amber-300" id="slotConstBadge">0 / 4 Slots</span>
         </div>
         <p class="text-xs text-amber-900 mb-3 font-serif italic">"To form a more perfect Union... the supreme Law of the Land."</p>
 
@@ -272,32 +263,240 @@
              ondragover="handleDragOver(event)" 
              ondragleave="handleDragLeave(event)" 
              ondrop="handleDrop(event, 'const')" 
-             class="arch-drop-zone rounded-xl flex-1 min-h-[220px] p-2.5 flex flex-col gap-2.5 bg-white/70 border-2 border-dashed border-amber-300">
+             class="arch-drop-zone rounded-xl flex-1 min-h-[220px] p-2.5 flex flex-col gap-2.5 bg-white/80 border-2 border-dashed border-amber-300">
           <!-- Dropped Cards Injected Here -->
         </div>
       </div>
 
     </section>
 
-    <!-- The Archive Tray / Sorter Drawer (White Block Container) -->
+    <!-- The Archive Tray / Sorter Drawer (Clean White Container) -->
     <section class="parchment-sheet bg-white rounded-2xl p-5 border-2 border-slate-300 shadow-xl">
       <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
         <div class="flex items-center gap-2">
           <div class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900">The Historical Vault: Unclassified Clauses &amp; Powers</h3>
-          <span id="vaultRemaining" class="text-xs font-mono font-bold text-amber-700">(12 items awaiting assignment)</span>
+          <span id="vaultRemaining" class="text-xs font-mono font-bold text-amber-700">(12 clauses awaiting assignment)</span>
         </div>
-        <span class="text-[11px] text-slate-500 italic">Drag to an archival chamber, or click "Dispatch..." on touchscreens</span>
+        <span class="text-[11px] text-slate-500 italic">Drag cards to a chamber above, or click "Dispatch..." on mobile/touch</span>
       </div>
 
       <div id="archiveTray" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 min-h-[140px] p-3 rounded-xl bg-slate-50 border-2 border-dashed border-slate-300">
-        <!-- Archival Cards Populated by JS -->
+        <!-- Archival Cards Dynamically Injected Here via JavaScript -->
       </div>
     </section>
 
   </main>
 
-  <!-- Full Timeline View (Chronological Transcript of Attached PDF) -->
+  <!-- MAIN VIEW 2: Differentiated Worksheets Suite (Sophia's 4 UDL Formats) -->
+  <section id="worksheetsView" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 flex flex-col gap-5">
+
+    <!-- Header Banner -->
+    <div class="parchment-sheet bg-white rounded-2xl p-5 border-2 border-slate-300 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded bg-emerald-100 text-emerald-900 border border-emerald-300">UDL Differentiation Suite</span>
+          <span class="text-xs text-slate-500 font-mono">4 Adaptive Formats (IEP, ELL, Executive Functioning, &amp; AP)</span>
+        </div>
+        <h2 class="text-base sm:text-lg font-bold font-display uppercase tracking-wide text-slate-900">Adaptive Classroom Civics Worksheets</h2>
+        <p class="text-xs text-slate-600 font-serif italic">Multi-modal tasks aligned with Nevada Academic Content Standards (NV SS.9-12.C.5).</p>
+      </div>
+
+      <!-- Format Sub-Navigation -->
+      <div class="flex items-center gap-1.5 flex-wrap bg-slate-100 p-1 rounded-xl border border-slate-300 text-xs">
+        <button id="wsTab-1" onclick="switchWsSubtab(1)" class="px-2.5 py-1.5 rounded-lg font-bold bg-emerald-700 text-white shadow-xs transition">1. Kinesthetic Timeline</button>
+        <button id="wsTab-2" onclick="switchWsSubtab(2)" class="px-2.5 py-1.5 rounded-lg font-semibold text-slate-700 hover:text-black transition">2. ELL Primary Source</button>
+        <button id="wsTab-3" onclick="switchWsSubtab(3)" class="px-2.5 py-1.5 rounded-lg font-semibold text-slate-700 hover:text-black transition">3. Cause &amp; Effect</button>
+        <button id="wsTab-4" onclick="switchWsSubtab(4)" class="px-2.5 py-1.5 rounded-lg font-semibold text-slate-700 hover:text-black transition">4. Advanced DBQ</button>
+      </div>
+    </div>
+
+    <!-- Format 1: Kinesthetic Drag-and-Drop Timeline Worksheet -->
+    <div id="wsSubpanel-1" class="parchment-sheet bg-white rounded-2xl p-5 sm:p-6 border-2 border-slate-300 shadow-xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div>
+          <span class="text-[10px] font-mono font-bold uppercase text-emerald-700">Format 1: Kinesthetic &amp; Visual Learners (ADHD / Executive Support)</span>
+          <h3 class="text-sm font-bold font-display text-slate-900 mt-0.5">Chronological Milestone Sequence (1777–1791)</h3>
+        </div>
+        <button onclick="checkTimelineSequence()" class="px-3 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <span>Verify Chronology</span>
+        </button>
+      </div>
+      <p class="text-xs text-slate-600 font-serif italic">Drag the milestone cards from the tray into their chronological order in the numbered caption slots below.</p>
+
+      <!-- Chronological Drop Slots -->
+      <div id="timelineDropSlots" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <!-- Unassigned Event Cards Tray -->
+      <div class="mt-4 pt-3 border-t border-slate-200">
+        <span class="text-[10px] font-mono font-bold uppercase text-slate-500 block mb-2">Milestone Card Tray (Drag into boxes above):</span>
+        <div id="timelineCardTray" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 p-3 rounded-xl bg-slate-50 border-2 border-dashed border-slate-300 min-h-[90px]">
+          <!-- Event cards injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Format 2: ELL Primary Source Analysis with Guided Vocabulary -->
+    <div id="wsSubpanel-2" class="hidden parchment-sheet bg-white rounded-2xl p-5 sm:p-6 border-2 border-slate-300 shadow-xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div>
+          <span class="text-[10px] font-mono font-bold uppercase text-blue-700">Format 2: Multilingual (ELL) &amp; Guided Reading Support</span>
+          <h3 class="text-sm font-bold font-display text-slate-900 mt-0.5">Primary Source Analysis: Federalist No. 15 (Alexander Hamilton, 1787)</h3>
+        </div>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-blue-100 text-blue-900 font-bold border border-blue-200">Lexile Scaffolded</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Primary Source Excerpt with Clickable Vocabulary -->
+        <div class="lg:col-span-7 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+          <span class="text-[10px] font-mono font-bold uppercase text-slate-500 block">Source Excerpt (Click bold terms for definitions):</span>
+          <blockquote class="font-serif text-xs text-slate-800 leading-relaxed italic border-l-2 border-amber-500 pl-3">
+            "We may indeed with propriety be said to have reached almost the last stage of national 
+            <button onclick="showVocab('humiliation', 'Deep embarrassment or public shame caused by weakness.')" class="underline decoration-amber-500 decoration-2 font-bold text-amber-900 hover:bg-amber-100 rounded px-0.5">humiliation</button>. 
+            There is scarcely any thing that can wind up the debility of our political system. Do we owe debts to foreigners and our own citizens? These remain without any viable funds to discharge them. Have we valuable 
+            <button onclick="showVocab('territories', 'Land areas claimed by a country but not yet admitted as full states.')" class="underline decoration-amber-500 decoration-2 font-bold text-amber-900 hover:bg-amber-100 rounded px-0.5">territories</button> 
+            in the possession of a foreign power? They are retained because we have no troops or money to reclaim them. The fundamental principle in the existing Confederation is that laws act only upon states, without 
+            <button onclick="showVocab('sanctions', 'Penalties or punishments used to force compliance with a law.')" class="underline decoration-amber-500 decoration-2 font-bold text-amber-900 hover:bg-amber-100 rounded px-0.5">sanctions</button> 
+            or power to enforce obedience."
+          </blockquote>
+
+          <div id="vocabInspector" class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-950">
+            <span class="font-bold font-mono text-[10px] uppercase text-amber-800 block mb-0.5">Guided Vocabulary Box</span>
+            <span id="vocabDesc" class="italic">Click any underlined vocabulary word in the excerpt to view its definition here.</span>
+          </div>
+        </div>
+
+        <!-- Sentence Stems & Guided Response Area -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-3">
+          <div>
+            <span class="text-[10px] font-mono font-bold uppercase text-slate-700 block mb-1">Click a sentence stem to insert it below:</span>
+            <div class="flex flex-col gap-1.5">
+              <button onclick="insertStem('This document suggests that the national government under the Articles was too weak because ')" class="p-2 text-left rounded-lg bg-slate-100 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-xs font-semibold text-slate-800 transition">
+                ✦ "This document suggests that the national government was too weak because..."
+              </button>
+              <button onclick="insertStem('Hamilton argues that without the power to enforce laws, Congress had ')" class="p-2 text-left rounded-lg bg-slate-100 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-xs font-semibold text-slate-800 transition">
+                ✦ "Hamilton argues that without the power to enforce laws, Congress had..."
+              </button>
+              <button onclick="insertStem('This evidence directly explains why delegates in Philadelphia decided to ')" class="p-2 text-left rounded-lg bg-slate-100 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-xs font-semibold text-slate-800 transition">
+                ✦ "This evidence directly explains why delegates in Philadelphia decided to..."
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-[10px] font-mono font-bold uppercase text-slate-700 block mb-1">Student Analysis Response:</label>
+            <textarea id="elResponseText" rows="3" placeholder="Draft your analysis using the sentence stems above..." class="w-full p-2.5 text-xs rounded-xl bg-slate-50 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 font-serif"></textarea>
+            <button onclick="saveElResponse()" class="mt-2 w-full py-1.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-lg transition">Save Analysis Response</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Format 3: Cause-and-Effect Graphic Organizer (Executive Functioning Support) -->
+    <div id="wsSubpanel-3" class="hidden parchment-sheet bg-white rounded-2xl p-5 sm:p-6 border-2 border-slate-300 shadow-xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div>
+          <span class="text-[10px] font-mono font-bold uppercase text-purple-700">Format 3: Executive-Functioning &amp; Cognitive Structuring Support</span>
+          <h3 class="text-sm font-bold font-display text-slate-900 mt-0.5">Pre-Filled Cause &amp; Effect Organizer: The Road to 1787</h3>
+        </div>
+        <button onclick="checkCauseEffect()" class="px-3 py-1.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs transition">
+          Verify Causal Chains
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+              <th class="p-2.5 w-1/3">1. Structural Defect (Pre-filled Cause)</th>
+              <th class="p-2.5 w-1/3">2. Historical Crisis / Immediate Effect</th>
+              <th class="p-2.5 w-1/3">3. 1787 Constitutional Remedy</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700">
+            <tr>
+              <td class="p-2.5 bg-slate-50/60 font-serif"><strong>No Federal Taxation Power:</strong> Congress could only request voluntary requisitions from states.</td>
+              <td class="p-2.5 italic">National debt soared; Continental Army veterans were left unpaid; credit collapsed abroad.</td>
+              <td class="p-2.5">
+                <select id="causeEffect1" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-xs font-semibold focus:outline-none">
+                  <option value="">Select the remedy...</option>
+                  <option value="correct">Article I, Sec. 8: Direct congressional power to lay and collect taxes.</option>
+                  <option value="wrong1">Article II: President given veto over treaties.</option>
+                  <option value="wrong2">Article III: Supreme Court justices appointed for life.</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2.5 bg-slate-50/60 font-serif"><strong>Absence of Independent Executive:</strong> Lacked a chief magistrate or permanent standing commander.</td>
+              <td class="p-2.5 italic">National government was powerless to mobilize troops when Shays' Rebellion shut down courts.</td>
+              <td class="p-2.5">
+                <select id="causeEffect2" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-xs font-semibold focus:outline-none">
+                  <option value="">Select the remedy...</option>
+                  <option value="wrong1">Great Compromise dividing Congress into two houses.</option>
+                  <option value="correct">Article II: Creation of a unitary Executive branch and Commander-in-Chief.</option>
+                  <option value="wrong2">Three-Fifths Compromise counting enslaved individuals.</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2.5 bg-slate-50/60 font-serif"><strong>Conflicting State Currencies &amp; Tariffs:</strong> Each state minted paper money and taxed interstate goods.</td>
+              <td class="p-2.5 italic">Interstate trade collapsed into hyperinflation and economic warfare among neighbor states.</td>
+              <td class="p-2.5">
+                <select id="causeEffect3" class="w-full p-2 rounded-lg bg-white border border-slate-300 text-xs font-semibold focus:outline-none">
+                  <option value="">Select the remedy...</option>
+                  <option value="wrong1">Bill of Rights protecting freedom of speech.</option>
+                  <option value="wrong2">Electoral College system for presidential elections.</option>
+                  <option value="correct">Commerce Clause &amp; Art. I, Sec. 10: Sole federal power to regulate commerce and coin money.</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="causeEffectFeedback" class="text-xs font-mono font-semibold text-slate-700 min-h-[20px]"></div>
+    </div>
+
+    <!-- Format 4: Advanced DBQ Challenge with Constructed Response -->
+    <div id="wsSubpanel-4" class="hidden parchment-sheet bg-white rounded-2xl p-5 sm:p-6 border-2 border-slate-300 shadow-xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div>
+          <span class="text-[10px] font-mono font-bold uppercase text-amber-700">Format 4: Advanced &amp; AP Civics Extension</span>
+          <h3 class="text-sm font-bold font-display text-slate-900 mt-0.5">Comparative DBQ Inquiry: Anti-Federalist Brutus vs. Federalist No. 51</h3>
+        </div>
+        <button onclick="copyAdvDbqResponse()" id="btnCopyAdvDbqText" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-black text-amber-300 font-bold text-xs transition flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"/></svg>
+          <span>Copy Constructed Response</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200">
+          <span class="font-bold font-mono text-[10px] text-amber-900 uppercase block mb-1">Document A: Anti-Federalist Brutus No. 1 (1787)</span>
+          <p class="font-serif italic text-amber-950 leading-relaxed">
+            "In a republic of such vast extent as the United States, the people cannot be properly acquainted with the character of their rulers, nor will the rulers be in a situation to possess the confidence of the people... The immense powers of the legislature will swallow up the state assemblies and annihilate state sovereignty."
+          </p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-sky-50 border border-sky-200">
+          <span class="font-bold font-mono text-[10px] text-sky-900 uppercase block mb-1">Document B: Federalist No. 51 (James Madison, 1788)</span>
+          <p class="font-serif italic text-sky-950 leading-relaxed">
+            "If men were angels, no government would be necessary. In framing a government which is to be administered by men over men, the great difficulty lies in this: you must first enable the government to control the governed; and in the next place oblige it to control itself. Ambition must counteract ambition."
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <label class="text-[11px] font-bold text-slate-800 uppercase block mb-1">Advanced DBQ Prompt &amp; Constructed Response Area:</label>
+        <p class="text-xs text-slate-600 mb-2 italic">Prompt: Evaluate whether the Constitution of 1787 created a safeguarded republic as Madison argued, or an inevitable consolidation of dangerous power as feared by Brutus.</p>
+        <textarea id="dbqAdvResponseText" rows="4" placeholder="Compose your evidence-based argument citing both Document A and Document B..." class="w-full p-3 text-xs rounded-xl bg-slate-50 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 font-serif"></textarea>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MAIN VIEW 3: Comprehensive Timeline of U.S. History (Full Transcript of Attached PDF) -->
   <section id="timelineView" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 flex flex-col gap-5">
     
     <!-- Timeline Banner & Search Container -->
@@ -305,21 +504,21 @@
       <div>
         <div class="flex items-center gap-2 mb-1">
           <span class="px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded bg-amber-100 text-amber-900 border border-amber-400">1492 – Present</span>
-          <span class="text-xs text-slate-500 font-mono font-semibold">44 Historical Benchmarks across 7 Eras</span>
+          <span class="text-xs text-slate-500 font-mono font-semibold">44 Benchmarks across 7 Eras (Complete Attached PDF)</span>
         </div>
-        <h2 class="text-lg font-bold font-display uppercase tracking-wide text-slate-900">Comprehensive Timeline of United States History</h2>
-        <p class="text-xs text-slate-600 font-serif italic">Complete transcription of the attached historical curriculum documentation.</p>
+        <h2 class="text-base sm:text-lg font-bold font-display uppercase tracking-wide text-slate-900">Comprehensive Timeline of United States History</h2>
+        <p class="text-xs text-slate-600 font-serif italic">Complete transcription of curriculum documentation.</p>
       </div>
 
-      <!-- Interactive Search Box -->
+      <!-- Search Box -->
       <div class="w-full md:w-80 flex items-center gap-2 bg-slate-50 border-2 border-slate-300 rounded-xl px-3 py-2">
         <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
         <input type="text" id="timelineSearchInput" oninput="filterTimelineSearch()" placeholder="Search event, date, or topic..." class="bg-transparent text-xs w-full focus:outline-none text-slate-800 font-medium">
       </div>
     </div>
 
-    <!-- Quick Navigation Era Buttons -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-scrollbar">
+    <!-- Quick Jump Era Pills -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
       <button onclick="scrollToEra('era-1')" class="shrink-0 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100 border border-slate-300 text-slate-800 font-semibold transition">1. Colonial</button>
       <button onclick="scrollToEra('era-2')" class="shrink-0 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100 border border-slate-300 text-slate-800 font-semibold transition">2. Revolutionary</button>
       <button onclick="scrollToEra('era-3')" class="shrink-0 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100 border border-slate-300 text-slate-800 font-semibold transition">3. Antebellum</button>
@@ -329,14 +528,14 @@
       <button onclick="scrollToEra('era-7')" class="shrink-0 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-100 border border-slate-300 text-slate-800 font-semibold transition">7. 21st Century</button>
     </div>
 
-    <!-- Timeline Entries Container (Populated dynamically) -->
-    <div id="timelineEntries" class="flex flex-col gap-6">
-      <!-- Injected by JavaScript -->
+    <!-- Dynamic Timeline Entries Container -->
+    <div id="timelineEntries" class="flex flex-col gap-5">
+      <!-- Populated by JavaScript -->
     </div>
 
   </section>
 
-  <!-- Socratic Coach Drawer (White Block Sheet) -->
+  <!-- Socratic Coach Drawer (Slide-Over Card) -->
   <aside id="coachDrawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white border-l-2 border-slate-300 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col text-slate-900">
     <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
       <div class="flex items-center gap-2">
@@ -355,9 +554,9 @@
       <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
         <span class="text-[10px] uppercase font-bold text-amber-700 tracking-wider block mb-1">Guiding Inquiries</span>
         <ul class="space-y-2 text-slate-700 leading-relaxed list-disc list-inside">
-          <li><strong>Fiscal Muscle:</strong> Could the Continental Congress directly compel tax payments, or did it have to politely request voluntary requisitions?</li>
-          <li><strong>The Shays Crisis:</strong> Why did the Massachusetts court shutdowns alarm Washington and Madison into demanding a Constitutional Convention?</li>
-          <li><strong>Shared Repudiation:</strong> What specific British governing institution did both the 1777 and 1787 compacts strictly outlaw?</li>
+          <li><strong>Fiscal Power:</strong> Could the Continental Congress directly compel tax payments, or did it have to rely on voluntary requisitions?</li>
+          <li><strong>The Shays Crisis:</strong> Why did the Massachusetts court shutdowns alarm Washington and Madison into demanding constitutional reform?</li>
+          <li><strong>Shared Repudiation:</strong> What specific British governing institution did both the 1777 and 1787 compacts strictly ban?</li>
         </ul>
       </div>
 
@@ -376,12 +575,12 @@
 
     <div class="p-4 border-t border-slate-200 bg-slate-50">
       <button onclick="autoStudyFill()" class="w-full py-2.5 bg-slate-900 hover:bg-black text-amber-200 text-xs font-bold rounded-xl transition shadow">
-        Toggle Teacher Answer Key (Study Mode)
+        Auto-Fill Solution (Teacher / Study Key)
       </button>
     </div>
   </aside>
 
-  <!-- DBQ Synthesis Notebook Modal (White Block Card) -->
+  <!-- DBQ Synthesis Notebook Modal -->
   <div id="notebookModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white border-2 border-slate-300 w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] flex flex-col text-slate-900">
       <div class="flex items-start justify-between pb-3 border-b border-slate-200 mb-4">
@@ -398,7 +597,7 @@
         <div>
           <label class="text-[11px] font-bold text-amber-800 uppercase block mb-1">Working DBQ Thesis Formula:</label>
           <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 font-serif text-slate-800 leading-relaxed text-sm">
-            "Although both the Articles of Confederation and the U.S. Constitution shared a commitment to <span class="text-emerald-700 font-semibold underline">popular sovereignty and anti-monarchical republicanism</span>, the institutional deficiencies of the Confederation—most notably <span class="text-amber-800 font-semibold underline" id="thesisWeakness">its inability to levy taxes and enforce treaties</span>—compelled delegates in 1787 to engineer an energetic federal republic characterized by <span class="text-sky-800 font-semibold underline" id="thesisStrength">separated branches and national supremacy</span>."
+            "Although both the Articles of Confederation and the U.S. Constitution shared a commitment to <span class="text-emerald-700 font-semibold underline">popular sovereignty and anti-monarchical republicanism</span>, the institutional deficiencies of the Confederation—most notably <span class="text-amber-800 font-semibold underline">its inability to levy taxes and enforce treaties</span>—compelled delegates in 1787 to engineer an energetic federal republic characterized by <span class="text-sky-800 font-semibold underline">separated branches and national supremacy</span>."
           </div>
         </div>
 
@@ -407,11 +606,6 @@
           <div id="notebookEvidenceLog" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-mono text-[11px] space-y-1.5 max-h-48 overflow-y-auto">
             <!-- Populated dynamically -->
           </div>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-950">
-          <span class="font-bold block mb-1 text-sky-900">Writing Prompt:</span>
-          Analyze the extent to which the Constitutional Convention represented a radical break from, rather than a continuation of, the Revolutionary principles established under the Articles of Confederation.
         </div>
       </div>
 
@@ -427,7 +621,7 @@
     </div>
   </div>
 
-  <!-- Touch Dispatch Modal (White Block Card) -->
+  <!-- Touch Dispatch Modal -->
   <div id="dispatchModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white border-2 border-slate-300 w-full max-w-sm rounded-2xl shadow-2xl p-5 text-slate-900">
       <span class="text-[10px] font-mono uppercase text-amber-700 font-bold block mb-1">Tactile Placement Selector</span>
@@ -445,7 +639,7 @@
         </button>
         <button onclick="confirmDispatch('const')" class="p-3 text-left rounded-xl bg-sky-50 border-2 border-sky-300 text-sky-950 hover:bg-sky-100 transition flex items-center justify-between">
           <span>🏛️ U.S. Constitution (1787)</span>
-          <span class="text-[10px] font-mono text-sky-800 font-bold">Federal Supremacy</span>
+          <span class="text-[10px] font-mono text-sky-800 font-bold">Federal Energy</span>
         </button>
       </div>
 
@@ -456,16 +650,16 @@
   </div>
 
   <script>
-    // 12 Curated Historical Attributes with Standard vs. Guided (IEP) content levels
+    // 12 Curated Historical Clauses with Standard vs. Guided (IEP) Lexile Levels
     const HISTORICAL_DATA = [
       {
         id: 'clause-1',
         title: 'Requisition System (No Direct Tax Power)',
         category: 'confed',
         icon: '🪙',
-        standardSummary: 'Congress could request state fiscal quotas but held no constitutional authority to compel tax revenues, plunging the confederation into sovereign default.',
-        guidedSummary: 'The national government could not tax citizens directly. It had to beg individual states for money, leaving soldiers unpaid.',
-        quote: '"The United States in Congress assembled shall never engage in war... nor coin money... nor borrow money... unless nine states assent." — Art. IX'
+        standardSummary: 'Congress could request state fiscal quotas but held no constitutional authority to compel tax revenues, plunging the nation into debt default.',
+        guidedSummary: 'The national government could not tax citizens directly. It had to ask states for money, leaving soldiers unpaid.',
+        quote: '"The United States in Congress assembled shall never engage in war... nor coin money... unless nine states assent." — Art. IX'
       },
       {
         id: 'clause-2',
@@ -473,7 +667,7 @@
         category: 'confed',
         icon: '🗳️',
         standardSummary: 'Each state possessed a single legislative vote regardless of population, requiring 9 of 13 state delegations to pass major laws and unanimity to amend.',
-        guidedSummary: 'One single legislative house where small states had the exact same voting power as huge states (1 state = 1 vote).',
+        guidedSummary: 'One single lawmaking house where small states had the exact same voting power as huge states (1 state = 1 vote).',
         quote: '"In determining questions in the United States in Congress assembled, each State shall have one vote." — Art. V'
       },
       {
@@ -481,8 +675,8 @@
         title: 'Absence of an Independent Chief Executive',
         category: 'confed',
         icon: '⚖️',
-        standardSummary: 'Lacked a separate national executive branch to enforce federal treaties or coordinate an armed defense during domestic crises like Shays\' Rebellion.',
-        guidedSummary: 'No President or executive leader existed to enforce federal laws or lead a national army against local rebellions.',
+        standardSummary: 'Lacked a separate national executive branch to enforce federal treaties or coordinate an armed defense during crises like Shays\' Rebellion.',
+        guidedSummary: 'No President or executive branch existed to enforce federal laws or lead a national army against local rebellions.',
         quote: '"There was no executive department to enforce the acts of Congress, leaving the laws mere recommendations." — Alexander Hamilton'
       },
       {
@@ -490,7 +684,7 @@
         title: 'State Currencies & Tariff Barriers',
         category: 'confed',
         icon: '📜',
-        standardSummary: 'Individual states minted divergent paper currencies and taxed goods crossing state lines, causing catastrophic interstate commercial paralysis.',
+        standardSummary: 'Individual states minted divergent paper currencies and taxed goods crossing state lines, causing catastrophic interstate trade conflict.',
         guidedSummary: 'Every state printed its own unique paper money and charged taxes on goods arriving from neighboring states.',
         quote: '"The states had fallen into the habit of treating each other more like hostile nations than members of one confederacy."'
       },
@@ -499,8 +693,8 @@
         title: 'Repudiation of Hereditary Nobility',
         category: 'shared',
         icon: '👑',
-        standardSummary: 'Both governing frameworks strictly prohibited the granting of aristocratic titles or hereditary offices, solidifying republican egalitarianism.',
-        guidedSummary: 'Both documents strictly banned kings, dukes, and hereditary royal titles to ensure government remained republican.',
+        standardSummary: 'Both governing frameworks strictly prohibited granting aristocratic titles or hereditary offices, solidifying republican egalitarianism.',
+        guidedSummary: 'Both documents strictly banned kings, lords, and royal titles to ensure government remained republican.',
         quote: '"No title of nobility shall be granted by the United States, nor by any state." — Shared in both Charters'
       },
       {
@@ -526,7 +720,7 @@
         title: 'National Postal Service & Intercolonial Links',
         category: 'shared',
         icon: '📬',
-        standardSummary: 'Both frameworks provided for a unified continental post road network to facilitate intercolonial communications and commercial transport.',
+        standardSummary: 'Both frameworks provided for a unified continental post road network to facilitate communications and commercial transport across states.',
         guidedSummary: 'Both agreements created a single federal post office system to connect people across all state borders.',
         quote: '"Establishing and regulating post offices from one state to another, throughout all the United States."'
       },
@@ -568,22 +762,24 @@
       }
     ];
 
-    let readingLevel = 'standard'; // 'standard' or 'guided'
-    let currentScaleDelta = 0; // -1 to 1 based on text scaling
+    let readingLevel = 'standard'; // 'standard' | 'guided'
     let soundEnabled = true;
     let draggedId = null;
     let activeDispatchId = null;
     let studentPlacements = {}; // clauseId -> 'confed' | 'shared' | 'const'
+    let currentActiveTab = 'desk'; // 'desk' | 'worksheets' | 'timeline'
+    let currentWsSubtab = 1;
 
-    // Tone.js acoustic synthesizer setup
     let acousticSynth = null;
     function initAcousticSynth() {
       if (!acousticSynth && window.Tone) {
-        acousticSynth = new Tone.PolySynth(Tone.Synth, {
-          oscillator: { type: 'sine' },
-          envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.3 }
-        }).toDestination();
-        Tone.start();
+        try {
+          acousticSynth = new Tone.PolySynth(Tone.Synth, {
+            oscillator: { type: 'sine' },
+            envelope: { attack: 0.01, decay: 0.2, sustain: 0.1, release: 0.3 }
+          }).toDestination();
+          Tone.start();
+        } catch (e) {}
       }
     }
 
@@ -615,6 +811,8 @@
       const boxConfed = document.getElementById('chamber-confed');
       const boxShared = document.getElementById('chamber-shared');
       const boxConst = document.getElementById('chamber-const');
+
+      if (!tray || !boxConfed || !boxShared || !boxConst) return;
 
       tray.innerHTML = '';
       boxConfed.innerHTML = '';
@@ -693,49 +891,288 @@
       card.addEventListener('dragstart', (e) => {
         draggedId = clause.id;
         card.style.opacity = '0.5';
-    let currentActiveTab = 'desk'; // 'desk' | 'timeline' | 'worksheets'
-    let currentWsSubtab = 1; // 1, 2, 3, or 4
+        e.dataTransfer.setData('text/plain', clause.id);
+        e.dataTransfer.effectAllowed = 'move';
+      });
 
-    // Kinesthetic Timeline Worksheet Data (Milestones 1777–1791)
-    const KINESTHETIC_EVENTS = [
-      { id: 'k-1', year: '1777', title: 'Articles of Confederation Drafted', correctSlot: 'slot-1', text: 'Second Continental Congress adopts the first national compact prioritizing state sovereignty.' },
-      { id: 'k-2', year: '1786–1787', title: 'Shays\' Rebellion in Massachusetts', correctSlot: 'slot-2', text: 'Indebted farmers shut down debtor courts; federal government is unable to send troops.' },
-      { id: 'k-3', year: '1787', title: 'Constitutional Convention (Philadelphia)', correctSlot: 'slot-3', text: 'Delegates draft a three-branch federal framework balancing large and small state delegations.' },
-      { id: 'k-4', year: '1791', title: 'Ratification of the Bill of Rights', correctSlot: 'slot-4', text: 'Ten amendments added to protect individual civil liberties and satisfy Anti-Federalist demands.' }
-    ];
+      card.addEventListener('dragend', () => {
+        card.style.opacity = '1';
+        draggedId = null;
+      });
 
-    let userTimelinePlacements = {}; // eventId -> slotId
+      card.innerHTML = `
+        <div>
+          <div class="flex items-start justify-between gap-1.5 mb-1.5">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-sm p-1 rounded-lg bg-slate-100 border border-slate-200 shrink-0">${clause.icon}</span>
+              <h4 class="text-xs font-bold text-slate-900 leading-tight">${clause.title}</h4>
+            </div>
+            ${activeChamber ? `
+              <button onclick="unassignClause('${clause.id}')" class="text-slate-400 hover:text-rose-600 p-0.5 rounded transition" title="Return to Vault">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            ` : `
+              <div class="text-slate-400">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><circle cx="7" cy="4" r="1.5"/><circle cx="13" cy="4" r="1.5"/><circle cx="7" cy="10" r="1.5"/><circle cx="13" cy="10" r="1.5"/><circle cx="7" cy="16" r="1.5"/><circle cx="13" cy="16" r="1.5"/></svg>
+              </div>
+            `}
+          </div>
+          <p class="text-[11px] text-slate-700 leading-relaxed font-serif line-clamp-3">${summaryText}</p>
+        </div>
+
+        <div class="mt-3 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px]">
+          <button onclick="speakClause('${summaryText.replace(/'/g, "\\'")}')" class="text-blue-700 hover:text-blue-900 flex items-center gap-1 font-semibold transition" title="Read aloud">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.757 3.63 8.25 4.51 8.25H6.75z"/></svg>
+            <span>Read</span>
+          </button>
+          ${!activeChamber ? `
+            <button onclick="openDispatchModal('${clause.id}')" class="px-2 py-0.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold border border-amber-300 transition">
+              Dispatch...
+            </button>
+          ` : `
+            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-600">${activeChamber}</span>
+          `}
+        </div>
+      `;
+
+      return card;
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      e.currentTarget.classList.add('drag-hover');
+    }
+
+    function handleDragLeave(e) {
+      e.currentTarget.classList.remove('drag-hover');
+    }
+
+    function handleDrop(e, chamber) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('drag-hover');
+      const clauseId = e.dataTransfer.getData('text/plain') || draggedId;
+      if (!clauseId) return;
+
+      studentPlacements[clauseId] = chamber;
+      playSoundEffect('place');
+      renderDesk();
+    }
+
+    function unassignClause(clauseId) {
+      delete studentPlacements[clauseId];
+      playSoundEffect('click');
+      renderDesk();
+    }
+
+    function openDispatchModal(clauseId) {
+      activeDispatchId = clauseId;
+      const clause = HISTORICAL_DATA.find(c => c.id === clauseId);
+      if (!clause) return;
+
+      document.getElementById('dispatchCardTitle').innerText = clause.title;
+      document.getElementById('dispatchCardDesc').innerText = readingLevel === 'guided' ? clause.guidedSummary : clause.standardSummary;
+      document.getElementById('dispatchModal').classList.remove('hidden');
+      playSoundEffect('click');
+    }
+
+    function closeDispatchModal() {
+      activeDispatchId = null;
+      document.getElementById('dispatchModal').classList.add('hidden');
+    }
+
+    function confirmDispatch(chamber) {
+      if (activeDispatchId) {
+        studentPlacements[activeDispatchId] = chamber;
+        playSoundEffect('place');
+        renderDesk();
+      }
+      closeDispatchModal();
+    }
+
+    function auditDraft() {
+      const placedKeys = Object.keys(studentPlacements);
+      if (placedKeys.length === 0) {
+        showDeskNotice("Place at least one clause card before running the classification audit.");
+        return;
+      }
+
+      let correctCount = 0;
+      HISTORICAL_DATA.forEach(clause => {
+        const studentCategory = studentPlacements[clause.id];
+        const cardEl = document.getElementById(`card-${clause.id}`);
+        if (!cardEl) return;
+
+        if (studentCategory === clause.category) {
+          correctCount++;
+          cardEl.classList.remove('border-rose-500', 'bg-rose-50');
+          cardEl.classList.add('border-emerald-600', 'bg-emerald-50');
+        } else if (studentCategory) {
+          cardEl.classList.remove('border-emerald-600', 'bg-emerald-50');
+          cardEl.classList.add('border-rose-500', 'bg-rose-50');
+        }
+      });
+
+      const totalPlaced = placedKeys.length;
+      const accuracy = Math.round((correctCount / totalPlaced) * 100);
+      document.getElementById('counterAccuracy').innerText = `${accuracy}%`;
+
+      if (accuracy === 100 && totalPlaced === HISTORICAL_DATA.length) {
+        playSoundEffect('success');
+        showDeskNotice("Splendid! All 12 clauses correctly categorized according to constitutional history.");
+      } else if (accuracy >= 75) {
+        playSoundEffect('success');
+        showDeskNotice(`Good progress: ${correctCount}/${totalPlaced} correct (${accuracy}%). Review red-bordered clauses.`);
+      } else {
+        playSoundEffect('misplaced');
+        showDeskNotice(`Audit: ${correctCount}/${totalPlaced} correct. Check Socratic Coach for hints.`);
+      }
+    }
+
+    function autoStudyFill() {
+      HISTORICAL_DATA.forEach(clause => {
+        studentPlacements[clause.id] = clause.category;
+      });
+      document.getElementById('counterAccuracy').innerText = '100%';
+      renderDesk();
+      auditDraft();
+      toggleCoachDrawer();
+      showDeskNotice("Teacher Answer Key applied. All 12 clauses populated into historical categories.");
+    }
+
+    function setReadingLevel(lvl) {
+      readingLevel = lvl;
+      const btnStd = document.getElementById('modeStandard');
+      const btnGde = document.getElementById('modeGuided');
+      if (lvl === 'guided') {
+        btnGde.className = "px-2 py-1 rounded font-bold bg-white text-blue-950 shadow-xs border border-blue-200 transition";
+        btnStd.className = "px-2 py-1 rounded font-medium text-slate-700 hover:text-slate-950 transition";
+      } else {
+        btnStd.className = "px-2 py-1 rounded font-bold bg-white text-blue-950 shadow-xs border border-blue-200 transition";
+        btnGde.className = "px-2 py-1 rounded font-medium text-slate-700 hover:text-slate-950 transition";
+      }
+      renderDesk();
+      playSoundEffect('click');
+    }
+
+    let fontSizeLevel = 0;
+    function adjustFontSize(delta) {
+      fontSizeLevel = Math.max(-1, Math.min(2, fontSizeLevel + delta));
+      const body = document.body;
+      body.classList.remove('text-xs', 'text-sm', 'text-base');
+      if (fontSizeLevel === 1) body.classList.add('text-sm');
+      else if (fontSizeLevel === 2) body.classList.add('text-base');
+      playSoundEffect('click');
+    }
+
+    function speakClause(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function toggleCoachDrawer() {
+      const drawer = document.getElementById('coachDrawer');
+      drawer.classList.toggle('translate-x-full');
+      playSoundEffect('click');
+    }
+
+    function openNotebookModal() {
+      document.getElementById('notebookModal').classList.remove('hidden');
+      playSoundEffect('click');
+    }
+
+    function closeNotebookModal() {
+      document.getElementById('notebookModal').classList.add('hidden');
+    }
+
+    function updateNotebookEvidenceLog() {
+      const log = document.getElementById('notebookEvidenceLog');
+      if (!log) return;
+      log.innerHTML = '';
+
+      const placedIds = Object.keys(studentPlacements);
+      if (placedIds.length === 0) {
+        log.innerHTML = '<span class="text-slate-400 italic">No clauses sorted yet. Items placed on the drafting desk will record here.</span>';
+        return;
+      }
+
+      placedIds.forEach(id => {
+        const item = HISTORICAL_DATA.find(c => c.id === id);
+        const chamberName = studentPlacements[id] === 'confed' ? 'Articles of Confederation' : studentPlacements[id] === 'const' ? 'U.S. Constitution' : 'Shared Republican Core';
+        const line = document.createElement('div');
+        line.innerHTML = `• <strong>${chamberName}:</strong> ${item.title}`;
+        log.appendChild(line);
+      });
+    }
+
+    function copyNotebookText() {
+      const logItems = Object.keys(studentPlacements).map(id => {
+        const item = HISTORICAL_DATA.find(c => c.id === id);
+        return `[${studentPlacements[id].toUpperCase()}] ${item.title}`;
+      }).join('\n');
+
+      const outline = `RATIFICATION SYNTHESIS DBQ OUTLINE\n\nThesis:\nAlthough both the Articles of Confederation and the U.S. Constitution shared a commitment to popular sovereignty, the institutional deficiencies of the Confederation compelled delegates in 1787 to engineer an energetic federal republic with separated branches.\n\nCategorized Evidence:\n${logItems || 'No items placed yet.'}`;
+
+      const temp = document.createElement('textarea');
+      temp.value = outline;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+
+      const btn = document.getElementById('btnCopyNotebook');
+      btn.innerText = "✓ Copied to Clipboard!";
+      setTimeout(() => { btn.innerHTML = '<span>Copy Outline to Clipboard</span>'; }, 2500);
+      playSoundEffect('click');
+    }
+
+    function showDeskNotice(msg) {
+      let toast = document.getElementById('deskToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'deskToast';
+        toast.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 border-2 border-amber-500 text-amber-200 px-4 py-3 rounded-xl shadow-2xl text-xs max-w-sm transition duration-300';
+        document.body.appendChild(toast);
+      }
+      toast.innerText = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => { toast.style.opacity = '0'; }, 3500);
+    }
 
     function switchViewTab(tab) {
       currentActiveTab = tab;
       const deskEl = document.getElementById('mainContent');
-      const timelineEl = document.getElementById('timelineView');
       const worksheetsEl = document.getElementById('worksheetsView');
-      
+      const timelineEl = document.getElementById('timelineView');
+
       const btnDesk = document.getElementById('btnTabDesk');
       const btnWs = document.getElementById('btnTabWorksheets');
       const btnTl = document.getElementById('btnTabTimeline');
 
-      // Reset all buttons to default inactive styling
+      // Reset all buttons
       [btnDesk, btnWs, btnTl].forEach(b => {
-        if (b) b.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 transition";
+        if (b) b.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-950 transition";
       });
 
-      // Hide all main containers
+      // Hide all panels
       deskEl.classList.add('hidden');
-      timelineEl.classList.add('hidden');
       worksheetsEl.classList.add('hidden');
+      timelineEl.classList.add('hidden');
 
       if (tab === 'desk') {
         deskEl.classList.remove('hidden');
-        btnDesk.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition";
+        btnDesk.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-600 text-white shadow-xs transition";
       } else if (tab === 'worksheets') {
         worksheetsEl.classList.remove('hidden');
-        btnWs.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-700 text-white shadow-sm transition";
+        btnWs.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 text-white shadow-xs transition";
         renderKinestheticTimeline();
       } else if (tab === 'timeline') {
         timelineEl.classList.remove('hidden');
-        btnTl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition";
+        btnTl.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-600 text-white shadow-xs transition";
         renderTimeline();
       }
 
@@ -743,24 +1180,32 @@
       playSoundEffect('click');
     }
 
-    function switchWsSubtab(subtabNum) {
-      currentWsSubtab = subtabNum;
+    function switchWsSubtab(num) {
+      currentWsSubtab = num;
       for (let i = 1; i <= 4; i++) {
         const panel = document.getElementById(`wsSubpanel-${i}`);
         const tabBtn = document.getElementById(`wsTab-${i}`);
-        if (i === subtabNum) {
+        if (i === num) {
           panel.classList.remove('hidden');
-          tabBtn.className = "px-3 py-1.5 rounded-xl font-bold bg-emerald-600 text-white shadow-xs transition";
+          tabBtn.className = "px-2.5 py-1.5 rounded-lg font-bold bg-emerald-700 text-white shadow-xs transition";
         } else {
           panel.classList.add('hidden');
-          tabBtn.className = "px-3 py-1.5 rounded-xl font-semibold text-slate-700 hover:text-black transition";
+          tabBtn.className = "px-2.5 py-1.5 rounded-lg font-semibold text-slate-700 hover:text-black transition";
         }
       }
-      if (subtabNum === 1) renderKinestheticTimeline();
+      if (num === 1) renderKinestheticTimeline();
       playSoundEffect('click');
     }
 
-    // Kinesthetic Drag-and-Drop Timeline Logic
+    const KINESTHETIC_EVENTS = [
+      { id: 'k-1', year: '1777', title: 'Articles of Confederation Drafted', correctSlot: 'slot-1', text: 'Second Continental Congress adopts the first national compact prioritizing state sovereignty.' },
+      { id: 'k-2', year: '1786–1787', title: 'Shays\' Rebellion in Massachusetts', correctSlot: 'slot-2', text: 'Indebted farmers shut down debtor courts; federal government is unable to send troops.' },
+      { id: 'k-3', year: '1787', title: 'Constitutional Convention (Philadelphia)', correctSlot: 'slot-3', text: 'Delegates draft a three-branch federal framework balancing large and small state delegations.' },
+      { id: 'k-4', year: '1791', title: 'Ratification of the Bill of Rights', correctSlot: 'slot-4', text: 'Ten amendments added to protect individual civil liberties and satisfy Anti-Federalist demands.' }
+    ];
+
+    let userTimelinePlacements = {};
+
     function renderKinestheticTimeline() {
       const tray = document.getElementById('timelineCardTray');
       const slotsContainer = document.getElementById('timelineDropSlots');
@@ -772,11 +1217,10 @@
       const slotConfigs = [
         { id: 'slot-1', expectedYear: '1777', label: 'Milestone 1 (1777): First National Compact' },
         { id: 'slot-2', expectedYear: '1786–1787', label: 'Milestone 2 (1786–1787): Domestic Rebellion & Crisis' },
-        { id: 'slot-3', expectedYear: '1787', label: 'Milestone 3 (1787): Philadelphia Constitutional Assembly' },
-        { id: 'slot-4', expectedYear: '1791', label: 'Milestone 4 (1791): Civil Liberties Safeguards' }
+        { id: 'slot-3', expectedYear: '1787', label: 'Milestone 3 (1787): Constitutional Convention' },
+        { id: 'slot-4', expectedYear: '1791', label: 'Milestone 4 (1791): Bill of Rights' }
       ];
 
-      // Build Slots
       slotConfigs.forEach(cfg => {
         const slotEl = document.createElement('div');
         slotEl.id = cfg.id;
@@ -810,7 +1254,6 @@
         slotsContainer.appendChild(slotEl);
       });
 
-      // Build unassigned cards in tray
       let remainingCount = 0;
       KINESTHETIC_EVENTS.forEach(ev => {
         if (!userTimelinePlacements[ev.id]) {
@@ -847,7 +1290,6 @@
       const eventId = e.dataTransfer.getData('text/plain');
       if (!eventId) return;
 
-      // Ensure no other event occupies this slot
       Object.keys(userTimelinePlacements).forEach(k => {
         if (userTimelinePlacements[k] === slotId) delete userTimelinePlacements[k];
       });
@@ -875,14 +1317,13 @@
       });
       if (correct === KINESTHETIC_EVENTS.length) {
         playSoundEffect('success');
-        showDeskNotice("Flawless! All 4 constitutional chronology milestones correctly sequenced.");
+        showDeskNotice("Flawless! All 4 constitutional milestones correctly sequenced.");
       } else {
         playSoundEffect('misplaced');
         showDeskNotice(`Timeline Sequence: ${correct}/${KINESTHETIC_EVENTS.length} correct. Check chronological years.`);
       }
     }
 
-    // Format 2: ELL Primary Source Vocabulary & Stems
     function showVocab(term, def) {
       const inspector = document.getElementById('vocabDesc');
       if (inspector) {
@@ -905,7 +1346,6 @@
       showDeskNotice("Saved: Your guided source analysis response has been stored!");
     }
 
-    // Format 3: Cause and Effect Verifier
     function checkCauseEffect() {
       const a1 = document.getElementById('causeEffect1').value;
       const a2 = document.getElementById('causeEffect2').value;
@@ -921,12 +1361,11 @@
         feedback.innerHTML = '<span class="text-emerald-700 font-bold">✓ Splendid! All 3 causal chains correctly identified and linked to constitutional remedies.</span>';
         playSoundEffect('success');
       } else {
-        feedback.innerHTML = `<span class="text-rose-600 font-bold">Incomplete: ${correctCount}/3 correct. Make sure to match each specific governmental crisis to its exact solution.</span>`;
+        feedback.innerHTML = `<span class="text-rose-600 font-bold">Incomplete: ${correctCount}/3 correct. Make sure to match each governmental crisis to its exact solution.</span>`;
         playSoundEffect('misplaced');
       }
     }
 
-    // Format 4: Copy Advanced DBQ Response
     function copyAdvDbqResponse() {
       const text = document.getElementById('dbqAdvResponseText').value;
       if (!text || text.trim().length === 0) {
@@ -946,7 +1385,6 @@
       playSoundEffect('click');
     }
 
-    // Complete Transcription of the Comprehensive Timeline of United States History (Pages 1-9)
     const FULL_TIMELINE_DATA = [
       {
         id: 'era-1',
@@ -1072,34 +1510,6 @@
       }
     ];
 
-    let currentActiveTab = 'desk'; // 'desk' | 'timeline'
-
-    function switchViewTab(tab) {
-      currentActiveTab = tab;
-      const deskEl = document.getElementById('mainContent');
-      const timelineEl = document.getElementById('timelineView');
-      const btnTab = document.getElementById('btnTabTimeline');
-      const btnDesk = document.getElementById('btnTabDesk');
-
-      if (tab === 'timeline') {
-        deskEl.classList.add('hidden');
-        timelineEl.classList.remove('hidden');
-        
-        btnTab.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition";
-        btnDesk.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 transition";
-
-        renderTimeline();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        timelineEl.classList.add('hidden');
-        deskEl.classList.remove('hidden');
-
-        btnDesk.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-600 text-white shadow-sm transition";
-        btnTab.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-950 transition";
-      }
-      playSoundEffect('click');
-    }
-
     function renderTimeline(filterText = '') {
       const container = document.getElementById('timelineEntries');
       if (!container) return;
@@ -1131,7 +1541,7 @@
 
         eraSection.innerHTML = `
           <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
-            <h3 class="text-base font-bold font-display text-slate-900 text-amber-900">${era.title}</h3>
+            <h3 class="text-base font-bold font-display text-amber-900">${era.title}</h3>
             <span class="text-xs font-mono font-bold text-slate-500">${matchingEvents.length} Event${matchingEvents.length === 1 ? '' : 's'}</span>
           </div>
           <div class="mt-2 space-y-1">
@@ -1163,7 +1573,6 @@
       }
     }
 
-    // Initialize desk on load
     window.addEventListener('DOMContentLoaded', () => {
       renderDesk();
     });
